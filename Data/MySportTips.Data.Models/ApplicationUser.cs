@@ -4,9 +4,8 @@ namespace MySportTips.Data.Models
     using System;
     using System.Collections.Generic;
 
-    using MySportTips.Data.Common.Models;
-
     using Microsoft.AspNetCore.Identity;
+    using MySportTips.Data.Common.Models;
 
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
     {

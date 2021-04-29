@@ -23,6 +23,28 @@
         {
         }
 
+        public DbSet<Team> Teams { get; set; }
+
+        public DbSet<Competition> Competitions { get; set; }
+
+        public DbSet<Country> Countries { get; set; }
+
+        public DbSet<Sport> Sports { get; set; }
+
+        public DbSet<Game> Games { get; set; }
+
+        public DbSet<Tip> Tips { get; set; }
+
+        public DbSet<Status> Status { get; set; }
+
+        public DbSet<TimePeriod> TimePeriods { get; set; }
+
+        public DbSet<Image> Images { get; set; }
+
+        public DbSet<Tag> Tags { get; set; }
+
+        public DbSet<TipTag> TipTags { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
