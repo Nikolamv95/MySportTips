@@ -7,5 +7,7 @@
     public interface IGameService
     {
         public Task CreateGame(AddGameInputModel gameInputModel);
+
+        public AddGameInputModel MapAllGameItems();
     }
 }

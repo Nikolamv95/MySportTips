@@ -22,7 +22,8 @@
         [HttpGet]
         public IActionResult AddGame()
         {
-            return this.View();
+            var gameViewItems = this.gameService.MapAllGameItems();
+            return this.View(gameViewItems);
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]

@@ -1,6 +1,7 @@
 ﻿namespace MySportTips.Services.Data
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -44,8 +45,23 @@
 
         public int GetCompetitionId(string name)
         {
+            if (!this.IsCompetitionExist(name))
+            {
+                throw new ArgumentException("This competition doesn't exist.");
+            }
+
             var country = this.competitionRepository.All().FirstOrDefault(x => x.Name == name);
             return country.Id;
+        }
+
+        public IEnumerable<KeyValuePair<string, string>> GetAllKeyValuePairs()
+        {
+            return this.competitionRepository
+                .All()
+                .Select(x => new { x.Id, x.Name })
+                .OrderBy(x => x.Name)
+                .ToList()
+                .Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name));
         }
     }
 }

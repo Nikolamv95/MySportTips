@@ -1,5 +1,7 @@
 ﻿namespace MySportTips.Services.Data
 {
+    using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -38,8 +40,23 @@
 
         public int GetSportId(string name)
         {
+            if (!this.IsSportExist(name))
+            {
+                throw new ArgumentException("This sport doesn't exist.");
+            }
+
             var sport = this.sportRepository.All().FirstOrDefault(x => x.Name == name);
             return sport.Id;
+        }
+
+        public IEnumerable<KeyValuePair<string, string>> GetAllKeyValuePairs()
+        {
+            return this.sportRepository
+                .All()
+                .Select(x => new { x.Id, x.Name })
+                .OrderBy(x => x.Name)
+                .ToList()
+                .Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name));
         }
     }
 }

@@ -63,5 +63,16 @@
             await this.gameRepository.AddAsync(game);
             await this.gameRepository.SaveChangesAsync();
         }
+
+        public AddGameInputModel MapAllGameItems()
+        {
+            return new AddGameInputModel()
+            {
+                SportItems = this.sportService.GetAllKeyValuePairs(),
+                CountryItems = this.countryService.GetAllKeyValuePairs(),
+                CompetitionItems = this.competitionService.GetAllKeyValuePairs(),
+                TeamItems = this.teamService.GetAllKeyValuePairs(),
+            };
+        }
     }
 }

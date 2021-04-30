@@ -1,5 +1,6 @@
 ﻿namespace MySportTips.Services.Data
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     public interface ISportService
@@ -9,5 +10,7 @@
         public bool IsSportExist(string name);
 
         public int GetSportId(string name);
+
+        IEnumerable<KeyValuePair<string, string>> GetAllKeyValuePairs();
     }
 }
