@@ -66,6 +66,10 @@ namespace MySportTips.Web
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ITipService, TipService>();
             services.AddTransient<IGameService, GameService>();
+            services.AddTransient<ISportService, SportService>();
+            services.AddTransient<ICountryService, CountryService>();
+            services.AddTransient<ICompetitionService, CompetitionService>();
+            services.AddTransient<ITeamService, TeamService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

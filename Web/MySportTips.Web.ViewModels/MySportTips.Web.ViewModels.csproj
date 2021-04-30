@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Data\MySportTips.Data.Models\MySportTips.Data.Models.csproj" />
+    <ProjectReference Include="..\..\MySportTips.Common\MySportTips.Common.csproj" />
     <ProjectReference Include="..\..\Services\MySportTips.Services.Mapping\MySportTips.Services.Mapping.csproj" />
   </ItemGroup>
 

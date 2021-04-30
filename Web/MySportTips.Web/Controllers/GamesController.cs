@@ -1,7 +1,6 @@
-﻿using MySportTips.Web.ViewModels.Tips;
-
-namespace MySportTips.Web.Controllers
+﻿namespace MySportTips.Web.Controllers
 {
+    using System;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
@@ -21,22 +20,31 @@ namespace MySportTips.Web.Controllers
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         [HttpGet]
-        public async Task<IActionResult> AddGame()
+        public IActionResult AddGame()
         {
             return this.View();
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         [HttpPost]
-        public async Task<IActionResult> AddGame(AddTipInputModel tipInputModel)
+        public async Task<IActionResult> AddGame(AddGameInputModel gameInputModel)
         {
             if (!this.ModelState.IsValid)
             {
                 return this.View();
             }
 
+            try
+            {
+                await this.gameService.CreateGame(gameInputModel);
+            }
+            catch (Exception ex)
+            {
+                this.ModelState.AddModelError(string.Empty, ex.Message);
+                return this.View();
+            }
 
-            return this.View();
+            return this.Redirect("/Home/Index");
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
@@ -45,6 +53,5 @@ namespace MySportTips.Web.Controllers
         {
             return this.View();
         }
-
     }
 }

@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-
-namespace MySportTips.Services.Data
+﻿namespace MySportTips.Services.Data
 {
+    using System.Threading.Tasks;
+
     public interface ITipService
     {
         public Task AddTip();

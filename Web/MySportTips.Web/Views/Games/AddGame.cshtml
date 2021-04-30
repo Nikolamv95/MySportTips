@@ -1,1 +1,49 @@
-﻿
+﻿@model MySportTips.Web.ViewModels.Games.AddGameInputModel
+@{
+    this.ViewData["Title"] = "Create new game";
+}
+
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">Add Game</h3>
+    </div>
+    <form method="post" enctype="application/x-www-form-urlencoded">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="card-body">
+            <div class="form-group">
+                <label asp-for="DateTime"></label>
+                <input asp-for="DateTime" class="form-control" placeholder="Date Time" />
+                <span asp-validation-for="DateTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SportName"></label>
+                <input asp-for="SportName" class="form-control" placeholder="Sport" />
+                <span asp-validation-for="SportName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CountryName"></label>
+                <input asp-for="CountryName" class="form-control" placeholder="Country" />
+                <span asp-validation-for="CountryName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CompetitionName"></label>
+                <input asp-for="CompetitionName" class="form-control" placeholder="Competition" />
+                <span asp-validation-for="CompetitionName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HomeTeamName"></label>
+                <input asp-for="HomeTeamName" class="form-control" placeholder="Home team" />
+                <span asp-validation-for="HomeTeamName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AwayTeamName"></label>
+                <input asp-for="AwayTeamName" class="form-control" placeholder="Away team" />
+                <span asp-validation-for="AwayTeamName" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
