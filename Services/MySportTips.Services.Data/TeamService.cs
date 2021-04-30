@@ -17,7 +17,7 @@
             this.teamRepository = teamRepository;
         }
 
-        public async Task AddTeam(string name)
+        public async Task AddTeamAsync(string name)
         {
             var team = new Team()
             {

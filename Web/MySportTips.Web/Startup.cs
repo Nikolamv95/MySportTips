@@ -1,6 +1,4 @@
-﻿using MySportTips.Services.Data;
-
-namespace MySportTips.Web
+﻿namespace MySportTips.Web
 {
     using System.Reflection;
 
@@ -18,6 +16,7 @@ namespace MySportTips.Web
     using MySportTips.Data.Models;
     using MySportTips.Data.Repositories;
     using MySportTips.Data.Seeding;
+    using MySportTips.Services.Data;
     using MySportTips.Services.Mapping;
     using MySportTips.Services.Messaging;
     using MySportTips.Web.ViewModels;
@@ -70,6 +69,10 @@ namespace MySportTips.Web
             services.AddTransient<ICountryService, CountryService>();
             services.AddTransient<ICompetitionService, CompetitionService>();
             services.AddTransient<ITeamService, TeamService>();
+            services.AddTransient<ITipService, TipService>();
+            services.AddTransient<IStatusService, StatusService>();
+            services.AddTransient<ITagService, TagService>();
+            services.AddTransient<ITimePeriodService, TimePeriodService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

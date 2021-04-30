@@ -1,5 +1,7 @@
 ﻿namespace MySportTips.Services.Data
 {
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using MySportTips.Data.Common.Repositories;
@@ -23,31 +25,31 @@
             this.teamService = teamService;
         }
 
-        public async Task CreateGame(AddGameInputModel gameInputModel)
+        public async Task CreateGameAsync(AddGameInputModel gameInputModel)
         {
             if (!this.sportService.IsSportExist(gameInputModel.SportName))
             {
-                await this.sportService.AddSport(gameInputModel.SportName);
+                await this.sportService.AddSportAsync(gameInputModel.SportName);
             }
 
             if (!this.countryService.IsCountryExist(gameInputModel.CountryName))
             {
-                await this.countryService.AddCountry(gameInputModel.CountryName);
+                await this.countryService.AddCountryAsync(gameInputModel.CountryName);
             }
 
             if (!this.competitionService.IsCompetitionExist(gameInputModel.CompetitionName))
             {
-                await this.competitionService.AddCompetition(gameInputModel.CompetitionName);
+                await this.competitionService.AddCompetitionAsync(gameInputModel.CompetitionName);
             }
 
             if (!this.teamService.IsTeamExist(gameInputModel.HomeTeamName))
             {
-                await this.teamService.AddTeam(gameInputModel.HomeTeamName);
+                await this.teamService.AddTeamAsync(gameInputModel.HomeTeamName);
             }
 
             if (!this.teamService.IsTeamExist(gameInputModel.AwayTeamName))
             {
-                await this.teamService.AddTeam(gameInputModel.AwayTeamName);
+                await this.teamService.AddTeamAsync(gameInputModel.AwayTeamName);
             }
 
             var game = new Game()
@@ -73,6 +75,54 @@
                 CompetitionItems = this.competitionService.GetAllKeyValuePairs(),
                 TeamItems = this.teamService.GetAllKeyValuePairs(),
             };
+        }
+
+        public ICollection<GameViewModel> GetAllGamesOrderByAddDate()
+        {
+            return this.gameRepository
+                .All()
+                .OrderByDescending(x => x.CreatedOn)
+                .Select(x => new GameViewModel()
+                {
+                    GameId = x.Id,
+                    DateTime = x.DateTime,
+                    SportName = x.Sport.Name,
+                    CountryName = x.Country.Name,
+                    CompetitionName = x.Competition.Name,
+                    HomeTeamName = x.HomeTeam.Name,
+                    AwayTeamName = x.AwayTeam.Name,
+                    Result = x.Result,
+                    Statistic = x.Statistics,
+                })
+                .ToList();
+        }
+
+        public GameViewModel GetById(int id)
+        {
+            return this.gameRepository.All()
+                 .Where(x => x.Id == id)
+                 .Select(x => new GameViewModel()
+                 {
+                     GameId = x.Id,
+                     DateTime = x.DateTime,
+                     SportName = x.Sport.Name,
+                     CountryName = x.Country.Name,
+                     CompetitionName = x.Competition.Name,
+                     HomeTeamName = x.HomeTeam.Name,
+                     AwayTeamName = x.AwayTeam.Name,
+                     Result = x.Result,
+                     Statistic = x.Statistics,
+                 }).FirstOrDefault();
+        }
+
+        public bool IsGameExist(int id)
+        {
+            if (!this.gameRepository.All().Any(x => x.Id == id))
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

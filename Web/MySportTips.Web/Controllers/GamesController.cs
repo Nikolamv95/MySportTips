@@ -32,12 +32,13 @@
         {
             if (!this.ModelState.IsValid)
             {
-                return this.View();
+                var gameViewItems = this.gameService.MapAllGameItems();
+                return this.View(gameViewItems);
             }
 
             try
             {
-                await this.gameService.CreateGame(gameInputModel);
+                await this.gameService.CreateGameAsync(gameInputModel);
             }
             catch (Exception ex)
             {
@@ -52,7 +53,20 @@
         [HttpGet]
         public IActionResult AllGames()
         {
-            return this.View();
+            var gamesViewModel = new ListGamesViewModel()
+            {
+                Games = this.gameService.GetAllGamesOrderByAddDate(),
+            };
+
+            return this.View(gamesViewModel);
+        }
+
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        [HttpGet]
+        public IActionResult ById(int id)
+        {
+            var gameViewModel = this.gameService.GetById(id);
+            return this.View(gameViewModel);
         }
     }
 }

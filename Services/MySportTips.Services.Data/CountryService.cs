@@ -17,7 +17,7 @@
             this.countryRepository = countryRepository;
         }
 
-        public async Task AddCountry(string name)
+        public async Task AddCountryAsync(string name)
         {
             var country = new Country()
             {

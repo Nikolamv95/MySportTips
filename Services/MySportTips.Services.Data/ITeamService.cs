@@ -5,7 +5,7 @@
 
     public interface ITeamService
     {
-        public Task AddTeam(string name);
+        public Task AddTeamAsync(string name);
 
         public bool IsTeamExist(string name);
 

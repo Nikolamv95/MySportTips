@@ -17,7 +17,7 @@
             this.sportRepository = sportRepository;
         }
 
-        public async Task AddSport(string name)
+        public async Task AddSportAsync(string name)
         {
             var sport = new Sport()
             {

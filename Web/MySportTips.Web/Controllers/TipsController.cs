@@ -1,30 +1,31 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using MySportTips.Common;
-using MySportTips.Data.Common.Repositories;
-using MySportTips.Data.Models;
-using MySportTips.Services.Data;
-using MySportTips.Web.ViewModels.Tips;
-
-namespace MySportTips.Web.Controllers
+﻿namespace MySportTips.Web.Controllers
 {
-    using System.Threading.Tasks;
-
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
+    using MySportTips.Common;
+    using MySportTips.Services.Data;
+    using MySportTips.Web.ViewModels.Tips;
+    using System;
+    using System.Threading.Tasks;
 
     public class TipsController : BaseController
     {
         private readonly ITipService tipService;
+        private readonly IWebHostEnvironment environment;
 
-        public TipsController(ITipService tipService)
+        public TipsController(ITipService tipService, IWebHostEnvironment environment)
         {
             this.tipService = tipService;
+            this.environment = environment;
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         [HttpGet]
-        public async Task<IActionResult> AddTip()
+        public IActionResult AddTip(int gameId)
         {
-            return this.View();
+            var tipView = this.tipService.MapAllTipItems(gameId);
+            return this.View(tipView);
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
@@ -33,18 +34,66 @@ namespace MySportTips.Web.Controllers
         {
             if (!this.ModelState.IsValid)
             {
-                return this.View();
+                var tipViewItems = this.tipService.MapAllTipItems(tipInputModel.GameId);
+                return this.View(tipViewItems);
             }
 
+            try
+            {
+                await this.tipService.CreateTipAsync(tipInputModel, $"{this.environment.WebRootPath}/images");
+            }
+            catch (Exception ex)
+            {
+                this.ModelState.AddModelError(string.Empty, ex.Message);
+                var tipViewItems = this.tipService.MapAllTipItems(tipInputModel.GameId);
+                return this.View(tipViewItems);
+            }
 
-            return this.View();
+            return this.Redirect("/Home/Index");
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         [HttpGet]
-        public async Task<IActionResult> AllTips()
+        public IActionResult AllTips()
         {
-            return this.View();
+            var tipsViewModel = new ListTipsViewModel()
+            {
+                Tips = this.tipService.GetAllTips(),
+            };
+
+            return this.View(tipsViewModel);
+        }
+
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        [HttpGet]
+        public IActionResult AllCurrentTips()
+        {
+            var tipsViewModel = new ListTipsViewModel()
+            {
+                Tips = this.tipService.GetAllCurrentTips(),
+            };
+
+            return this.View(tipsViewModel);
+        }
+
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        [HttpGet]
+        public IActionResult AllPastTips()
+        {
+            var tipsViewModel = new ListTipsViewModel()
+            {
+                Tips = this.tipService.GetAllPastTips(),
+            };
+
+            return this.View(tipsViewModel);
+        }
+
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        [HttpGet]
+        public IActionResult ById(int id)
+        {
+            var tipViewModel = this.tipService.GetById(id);
+            return this.View(tipViewModel);
         }
     }
 }

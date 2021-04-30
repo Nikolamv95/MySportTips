@@ -1,1 +1,90 @@
-﻿<h1>Add tip</h1>
+﻿@model MySportTips.Web.ViewModels.Tips.AddTipInputModel
+@{
+    this.ViewData["Title"] = "Add tip";
+    var tagItems = this.Model.TagItems.Select(x => new SelectListItem(x.Value, x.Key));
+    var selectionItems = this.Model.SelectionItems.Select(x => new SelectListItem(x.Value, x.Key));
+}
+
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">Add Tip</h3>
+    </div>
+    <form method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="card-body">
+            <div class="form-group">
+                <label asp-for="GameId"></label>
+                <p asp-for="GameId" class="form-control" type="hidden">@Model.GameId</p>
+                <span asp-validation-for="GameId" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="Selection"></label>
+                <div class="input-group">
+                    <input asp-for="Selection" class="form-control" placeholder="Selection" />
+                    <div class="input-group-append">
+                        <div class="input-group-prepend">
+                            <select class="form-control" asp-for="Selection" placeholder="Away team" style="width: 100%">
+                                @foreach (var selection in selectionItems)
+                                {
+                                    <option value="@selection.Text">@selection.Text</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <span asp-validation-for="TagName" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <textarea asp-for="Description" class="form-control" rows="6"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Odd"></label>
+                <input asp-for="Odd" class="form-control" placeholder="Odd" />
+                <span asp-validation-for="Odd" class="text-danger"></span>
+            </div>
+            <div class="list-group">
+                <label asp-for="StatusName"></label>
+                <select asp-for="StatusName" class="form-control">
+                    <option value="Win">Win</option>
+                    <option value="Lost">Lost</option>
+                    <option value="Unknown">Unknown</option>
+                </select>
+                <span asp-validation-for="StatusName" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="list-group">
+                <label asp-for="TimePeriod"></label>
+                <select asp-for="TimePeriod" class="form-control">
+                    <option value="Currently playing">Currently playing</option>
+                    <option value="Finished">Finished</option>
+                </select>
+                <span asp-validation-for="TimePeriod" class="text-danger"></span>
+            </div>
+            <br />
+            <div>
+                <label asp-for="TagName"></label>
+                <div class="input-group">
+                    <input asp-for="TagName" class="form-control" placeholder="Tag name" />
+                    <div class="input-group-append">
+                        <div class="input-group-prepend">
+                            <select class="form-control" asp-for="TagName" placeholder="Away team" style="width: 100%">
+                                @foreach (var tag in tagItems)
+                                {
+                                    <option value="@tag.Text">@tag.Text</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <span asp-validation-for="TagName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+
+    </form>
+</div>

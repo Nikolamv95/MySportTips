@@ -5,7 +5,7 @@
 
     public interface ICompetitionService
     {
-        public Task AddCompetition(string name);
+        public Task AddCompetitionAsync(string name);
 
         public bool IsCompetitionExist(string name);
 

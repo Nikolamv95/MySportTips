@@ -5,7 +5,7 @@
 
     public interface ICountryService
     {
-        public Task AddCountry(string name);
+        public Task AddCountryAsync(string name);
 
         public bool IsCountryExist(string name);
 

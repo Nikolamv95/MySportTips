@@ -17,7 +17,7 @@
             this.competitionRepository = competitionRepository;
         }
 
-        public async Task AddCompetition(string name)
+        public async Task AddCompetitionAsync(string name)
         {
             if (name == null)
             {

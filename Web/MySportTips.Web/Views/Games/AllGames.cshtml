@@ -1,1 +1,52 @@
-﻿    
+﻿@model MySportTips.Web.ViewModels.Games.ListGamesViewModel
+@{
+    this.ViewData["Title"] = "All games";
+}
+
+
+<table class="table table-striped table-hover table-responsive-md">
+    <thead>
+        <tr>
+            <th>
+                <a>#</a>
+            </th>
+            <th>
+                <a>Event Date</a>
+            </th>
+            <th>
+                <a>Sport</a>
+            </th>
+            <th>
+                <a>Country</a>
+            </th>
+            <th>
+                <a>Competition</a>
+            </th>
+            <th>
+                <a>Event</a>
+            </th>
+            <th>
+                <a>Open</a>
+            </th>
+            <th>
+                <a>Tips</a>
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var game in @Model.Games)
+        {
+            <tr>
+                <th scope="row">@game.GameId</th>
+                <td>@game.DateTime</td>
+                <td>@game.SportName</td>
+                <td>@game.CountryName</td>
+                <td>@game.CompetitionName</td>
+                <td><a>@game.HomeTeamName</a> v <a>@game.AwayTeamName</a></td>
+                <td><a asp-action="ById" asp-route-id="@game.GameId" class="btn btn-info">Edit</a></td>
+                <td><a asp-controller="Tips" asp-action="AddTip" asp-route-id="@game.GameId" asp-route-GameId="@game.GameId" class="btn btn-success">Add Tip</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

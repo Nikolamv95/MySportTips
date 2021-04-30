@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MySportTips.Web.ViewModels.Tips
+﻿namespace MySportTips.Web.ViewModels.Tips
 {
-    class ListTipsViewModel
+    using System.Collections.Generic;
+
+    public class ListTipsViewModel
     {
+        public ICollection<TipViewModel> Tips { get; set; }
     }
 }
