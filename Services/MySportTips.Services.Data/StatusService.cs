@@ -47,15 +47,5 @@
             var status = this.statusRepository.All().FirstOrDefault(x => x.Name == name);
             return status.Id;
         }
-
-        public Status GetStatus(string name)
-        {
-            if (!this.IsStatusExist(name))
-            {
-                throw new ArgumentException("This status doesn't exist.");
-            }
-
-            return this.statusRepository.All().FirstOrDefault(x => x.Name == name);
-        }
     }
 }

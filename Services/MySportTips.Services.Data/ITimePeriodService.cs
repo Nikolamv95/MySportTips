@@ -1,9 +1,6 @@
 ﻿namespace MySportTips.Services.Data
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
-
-    using MySportTips.Data.Models;
 
     public interface ITimePeriodService
     {

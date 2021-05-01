@@ -76,7 +76,6 @@
 
             await this.tipTagRepository.AddAsync(tipTag);
             await this.tipTagRepository.SaveChangesAsync();
-
         }
 
         public ICollection<TipViewModel> GetAllTips()
@@ -167,22 +166,15 @@
 
         public async Task EditTipAsync(EditTipInputModel editTipInput)
         {
+            if (!this.tipRepository.All().Any(x => x.Id == editTipInput.TipId))
+            {
+                throw new Exception("This tip doesn't exist!");
+            }
+
             var tip = this.tipRepository.All().FirstOrDefault(x => x.Id == editTipInput.TipId);
-
-            if (editTipInput.Description != null)
-            {
-                tip.Description = editTipInput.Description;
-            }
-
-            if (editTipInput.Selection != null)
-            {
-                tip.Selection = editTipInput.Selection;
-            }
-
-            if (editTipInput.Odd != null)
-            {
-                tip.Selection = editTipInput.Selection;
-            }
+            tip.Description = editTipInput.Description;
+            tip.Selection = editTipInput.Selection;
+            tip.Odd = editTipInput.Odd;
 
             if (editTipInput.StatusName != null)
             {

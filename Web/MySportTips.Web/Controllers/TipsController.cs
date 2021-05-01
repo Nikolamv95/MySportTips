@@ -30,6 +30,7 @@
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> AddTip(AddTipInputModel tipInputModel)
         {
@@ -65,6 +66,32 @@
             return this.View(tipsViewModel);
         }
 
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        [HttpGet]
+        public IActionResult EditTip(int id)
+        {
+            var editTipInputModel = this.tipService.MapEditTipModel(id);
+            return this.View(editTipInputModel);
+        }
+
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public async Task<IActionResult> EditTip(EditTipInputModel editTipInputModel)
+        {
+            try
+            {
+                await this.tipService.EditTipAsync(editTipInputModel);
+            }
+            catch (Exception ex)
+            {
+                this.ModelState.AddModelError(string.Empty, ex.Message);
+                return this.View();
+            }
+
+            return this.RedirectToAction(nameof(this.AllTips));
+        }
+
         [HttpGet]
         public IActionResult AllCurrentTips()
         {
@@ -92,20 +119,6 @@
         {
             var tipViewModel = this.tipService.GetById(id);
             return this.View(tipViewModel);
-        }
-
-        [HttpGet]
-        public IActionResult EditTip(int id)
-        {
-            var editTipInputModel = this.tipService.MapEditTipModel(id);
-            return this.View(editTipInputModel);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> EditTip(EditTipInputModel editTipInputModel)
-        {
-            await this.tipService.EditTipAsync(editTipInputModel);
-            return this.RedirectToAction(nameof(this.AllTips));
         }
     }
 }

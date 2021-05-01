@@ -7,11 +7,14 @@
     {
         public int TipId { get; set; }
 
+        [Required]
         public string Selection { get; set; }
 
+        [Required]
         public string Description { get; set; }
 
-        public double? Odd { get; set; }
+        [Required]
+        public double Odd { get; set; }
 
         [Display(Name = "Status")]
         public string StatusName { get; set; }
