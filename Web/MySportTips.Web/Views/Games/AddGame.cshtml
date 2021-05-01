@@ -1,6 +1,6 @@
 ﻿@model MySportTips.Web.ViewModels.Games.AddGameInputModel
 @{
-    this.ViewData["Title"] = "Create new game";
+    this.ViewData["Title"] = "Create new event";
     var sportItem = this.Model.SportItems.Select(x => new SelectListItem(x.Value, x.Key));
     var countryItem = this.Model.CountryItems.Select(x => new SelectListItem(x.Value, x.Key));
     var competitionItem = this.Model.CompetitionItems.Select(x => new SelectListItem(x.Value, x.Key));

@@ -5,5 +5,6 @@
         public const string SystemName = "MySportTips";
 
         public const string AdministratorRoleName = "Administrator";
+        public const string UserPayedRoleName = "PayedUser";
     }
 }

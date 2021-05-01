@@ -16,5 +16,9 @@
         public GameViewModel GetById(int id);
 
         public bool IsGameExist(int id);
+
+        public EditGameInputModel MapEditGameModel(int id);
+
+        public Task EditGameAsync(EditGameInputModel gameInputModel);
     }
 }

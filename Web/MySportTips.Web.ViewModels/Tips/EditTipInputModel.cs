@@ -1,6 +1,5 @@
 ﻿namespace MySportTips.Web.ViewModels.Tips
 {
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     public class EditTipInputModel

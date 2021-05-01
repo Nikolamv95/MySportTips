@@ -51,19 +51,8 @@
                 return this.View(tipViewItems);
             }
 
+            this.TempData["Message"] = "The tips was added successfully.";
             return this.RedirectToAction(nameof(this.AllTips));
-        }
-
-        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-        [HttpGet]
-        public IActionResult AllTips()
-        {
-            var tipsViewModel = new ListTipsViewModel()
-            {
-                Tips = this.tipService.GetAllTips(),
-            };
-
-            return this.View(tipsViewModel);
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
@@ -79,6 +68,11 @@
         [HttpPost]
         public async Task<IActionResult> EditTip(EditTipInputModel editTipInputModel)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View();
+            }
+
             try
             {
                 await this.tipService.EditTipAsync(editTipInputModel);
@@ -89,7 +83,20 @@
                 return this.View();
             }
 
+            this.TempData["Message"] = "The tips was edited successfully.";
             return this.RedirectToAction(nameof(this.AllTips));
+        }
+
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        [HttpGet]
+        public IActionResult AllTips()
+        {
+            var tipsViewModel = new ListTipsViewModel()
+            {
+                Tips = this.tipService.GetAllTips(),
+            };
+
+            return this.View(tipsViewModel);
         }
 
         [HttpGet]

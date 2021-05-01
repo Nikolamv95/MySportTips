@@ -1,0 +1,65 @@
+﻿@model MySportTips.Web.ViewModels.Games.EditGameInputModel
+@{
+    this.ViewData["Title"] = "Edit event";
+}
+
+<h1>Edit game</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post" asp-action="EditGame">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input type="hidden" asp-for="GameId" />
+            </div>
+            <div class="form-group">
+                <label asp-for="DateTime" class="control-label"></label>
+                <input asp-for="DateTime" class="form-control" />
+                <span asp-validation-for="DateTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SportName"></label>
+                <input asp-for="SportName" class="form-control" rows="6" />
+                <span asp-validation-for="SportName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CountryName" class="control-label"></label>
+                <input asp-for="CountryName" class="form-control" />
+                <span asp-validation-for="CountryName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CompetitionName" class="control-label"></label>
+                <input asp-for="CompetitionName" class="form-control" />
+                <span asp-validation-for="CompetitionName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HomeTeamName" class="control-label"></label>
+                <input asp-for="HomeTeamName" class="form-control" />
+                <span asp-validation-for="HomeTeamName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AwayTeamName" class="control-label"></label>
+                <input asp-for="AwayTeamName" class="form-control" />
+                <span asp-validation-for="AwayTeamName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Result" class="control-label"></label>
+                <input asp-for="Result" class="form-control" />
+                <span asp-validation-for="Result" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Statistics" class="control-label"></label>
+                <input asp-for="Statistics" class="form-control" />
+                <span asp-validation-for="Statistics" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="AllGames">Back to All Games</a>
+</div>

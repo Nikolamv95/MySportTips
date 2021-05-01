@@ -1,5 +1,6 @@
 ﻿namespace MySportTips.Services.Data
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -123,6 +124,93 @@
             }
 
             return true;
+        }
+
+        public EditGameInputModel MapEditGameModel(int id)
+        {
+            return this.gameRepository.All().Where(x => x.Id == id).Select(x => new EditGameInputModel
+            {
+                DateTime = x.DateTime,
+                HomeTeamName = x.HomeTeam.Name,
+                AwayTeamName = x.AwayTeam.Name,
+                SportName = x.Sport.Name,
+                CountryName = x.Country.Name,
+                CompetitionName = x.Competition.Name,
+                Result = x.Result,
+                Statistics = x.Statistics,
+            }).FirstOrDefault();
+        }
+
+        public async Task EditGameAsync(EditGameInputModel gameInputModel)
+        {
+            if (!this.gameRepository.All().Any(x => x.Id == gameInputModel.GameId))
+            {
+                throw new Exception("This game doesn't exist!");
+            }
+
+            var game = this.gameRepository.All().FirstOrDefault(x => x.Id == gameInputModel.GameId);
+
+            if (gameInputModel.SportName != null)
+            {
+                if (!this.sportService.IsSportExist(gameInputModel.SportName))
+                {
+                    await this.sportService.AddSportAsync(gameInputModel.SportName);
+                }
+
+                game.SportId = this.sportService.GetSportId(gameInputModel.SportName);
+            }
+
+            if (gameInputModel.CountryName != null)
+            {
+                if (!this.countryService.IsCountryExist(gameInputModel.CountryName))
+                {
+                    await this.countryService.AddCountryAsync(gameInputModel.CountryName);
+                }
+
+                game.CountryId = this.countryService.GetCountryId(gameInputModel.CountryName);
+            }
+
+            if (gameInputModel.CompetitionName != null)
+            {
+                if (!this.competitionService.IsCompetitionExist(gameInputModel.CompetitionName))
+                {
+                    await this.competitionService.AddCompetitionAsync(gameInputModel.CompetitionName);
+                }
+
+                game.CompetitionId = this.competitionService.GetCompetitionId(gameInputModel.CompetitionName);
+            }
+
+            if (gameInputModel.HomeTeamName != null)
+            {
+                if (!this.teamService.IsTeamExist(gameInputModel.HomeTeamName))
+                {
+                    await this.teamService.AddTeamAsync(gameInputModel.HomeTeamName);
+                }
+
+                game.HomeTeamId = this.teamService.GetTeamId(gameInputModel.HomeTeamName);
+            }
+
+            if (gameInputModel.AwayTeamName != null)
+            {
+                if (!this.teamService.IsTeamExist(gameInputModel.AwayTeamName))
+                {
+                    await this.teamService.AddTeamAsync(gameInputModel.AwayTeamName);
+                }
+
+                game.AwayTeamId = this.teamService.GetTeamId(gameInputModel.AwayTeamName);
+            }
+
+            if (gameInputModel.Result != null)
+            {
+                game.Result = gameInputModel.Result;
+            }
+
+            if (gameInputModel.Statistics != null)
+            {
+                game.Statistics = gameInputModel.Statistics;
+            }
+
+            await this.gameRepository.SaveChangesAsync();
         }
     }
 }

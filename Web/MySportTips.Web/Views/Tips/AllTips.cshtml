@@ -3,6 +3,13 @@
     this.ViewData["Title"] = "All Tips";
 }
 
+@if (this.TempData.ContainsKey("Message"))
+{
+    <div class="alert alert-success">@this.TempData["Message"]</div>
+}
+
+<h1>@this.ViewData["Name"]</h1>
+
 <table class="table table-striped table-hover table-responsive-md">
     <thead>
         <tr>
