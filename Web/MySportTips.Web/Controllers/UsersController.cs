@@ -60,9 +60,14 @@
         [HttpPost]
         public async Task<IActionResult> EditUser(EditUserInputModel userInputModel)
         {
-            if ( await this.userManager.FindByIdAsync(userInputModel.UserId) == null)
+            if (await this.userManager.FindByIdAsync(userInputModel.UserId) == null)
             {
                 throw new Exception("This user doesn't exist.");
+            }
+
+            if (userInputModel.OldRole == userInputModel.NewRole)
+            {
+                return this.RedirectToAction(nameof(this.ListUsers));
             }
 
             if (userInputModel.NewRole != GlobalConstants.AdministratorRoleName &&
@@ -72,7 +77,8 @@
                 throw new Exception("The role is invalid");
             }
 
-            if (this.roleManager.FindByNameAsync(userInputModel.NewRole) != null)
+            var roledCheck = await this.roleManager.FindByNameAsync(userInputModel.NewRole);
+            if (roledCheck == null)
             {
                 var role = new ApplicationRole(userInputModel.NewRole);
                 await this.roleManager.CreateAsync(role);
