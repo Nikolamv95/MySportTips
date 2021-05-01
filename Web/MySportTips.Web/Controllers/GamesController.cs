@@ -86,6 +86,7 @@
 
 
         [HttpGet]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName + "," + GlobalConstants.MemberRoleName)]
         public IActionResult AllGames()
         {
             var gamesViewModel = new ListGamesViewModel()
@@ -96,8 +97,8 @@
             return this.View(gamesViewModel);
         }
 
-
         [HttpGet]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName + "," + GlobalConstants.MemberRoleName)]
         public IActionResult ById(int id)
         {
             var gameViewModel = this.gameService.GetById(id);

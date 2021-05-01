@@ -1,4 +1,8 @@
-﻿<h1>@this.ViewData["Name"]</h1>
+﻿@model MySportTips.Web.ViewModels.Tips.ListTipsViewModel
+@{
+    this.ViewData["Title"] = "All Tips";
+}
+<h1>@this.ViewData["Name"]</h1>
 
 <table class="table table-striped table-hover table-responsive-md">
     <thead>
@@ -19,6 +23,9 @@
                 <a>Odd</a>
             </th>
             <th>
+                <a>Status</a>
+            </th>
+            <th>
                 <a>Time period</a>
             </th>
             <th>
@@ -30,11 +37,12 @@
         @foreach (var tip in @Model.Tips)
         {
             <tr>
-                <td>@tip.DateTime</td>
+                <td>@tip.DateTime.ToString("M")</td>
                 <td>@tip.CompetitionName</td>
                 <td><a>@tip.HomeTeamName</a> v <a>@tip.AwayTeamName</a></td>
                 <td>@tip.Selection</td>
                 <td>@tip.Odd</td>
+                <td>@tip.StatusName</td>
                 <td>@tip.TimePeriod</td>
                 <td><a asp-action="ById" asp-route-id="@tip.TipId" asp-route-TipId="@tip.TipId" class="btn btn-info">Info</a></td>
             </tr>

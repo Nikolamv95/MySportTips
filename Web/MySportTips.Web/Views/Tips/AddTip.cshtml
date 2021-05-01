@@ -13,8 +13,7 @@
         <div asp-validation-summary="All" class="text-danger"></div>
         <div class="card-body">
             <div class="form-group">
-                <label asp-for="GameId"></label>
-                <p asp-for="GameId" class="form-control" type="hidden">@Model.GameId</p>
+                <input type="hidden" asp-for="GameId" />
                 <span asp-validation-for="GameId" class="text-danger"></span>
             </div>
             <div>

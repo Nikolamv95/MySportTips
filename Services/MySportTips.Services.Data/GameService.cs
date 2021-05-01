@@ -130,6 +130,7 @@
         {
             return this.gameRepository.All().Where(x => x.Id == id).Select(x => new EditGameInputModel
             {
+                GameId = x.Id,
                 DateTime = x.DateTime,
                 HomeTeamName = x.HomeTeam.Name,
                 AwayTeamName = x.AwayTeam.Name,

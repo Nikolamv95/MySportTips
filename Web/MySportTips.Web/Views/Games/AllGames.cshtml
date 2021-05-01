@@ -49,7 +49,7 @@
         {
         <tr>
             <th scope="row">@game.GameId</th>
-            <td>@game.DateTime</td>
+            <td>@game.DateTime.ToString("M")</td>
             <td>@game.SportName</td>
             <td>@game.CountryName</td>
             <td>@game.CompetitionName</td>
@@ -57,7 +57,7 @@
             <td><a asp-action="ById" asp-route-id="@game.GameId"  class="btn btn-info">Info</a></td>
             @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
             {
-                <td><a asp-action="EditGame" asp-route-id="@game.GameId" asp-route-GameId="@game.GameId" class="btn btn-info">Edit</a></td>
+                <td><a asp-action="EditGame" asp-route-id="@game.GameId" asp-route-GameId="@game.GameId" class="btn btn-danger">Edit</a></td>
                 <td><a asp-controller="Tips" asp-action="AddTip" asp-route-id="@game.GameId" asp-route-GameId="@game.GameId" class="btn btn-success">Add Tip</a></td>
             }
         </tr>

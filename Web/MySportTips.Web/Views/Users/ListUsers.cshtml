@@ -1,0 +1,57 @@
+﻿@model IEnumerable<MySportTips.Data.Models.ApplicationUser>
+@{
+    this.ViewData["Title"] = "All users";
+}
+
+@if (Model.Any())
+{
+    @if (this.TempData.ContainsKey("Message"))
+    {
+        <div class="alert alert-success">@this.TempData["Message"]</div>
+    }
+
+    <h1>@this.ViewData["Name"]</h1>
+
+    <table class="table table-striped table-hover table-responsive-md">
+        <thead>
+            <tr>
+                <th>
+                    <a>Username</a>
+                </th>
+                <th>
+                    <a>Email</a>
+                </th>
+                <th>
+                    <a>Edit</a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in @Model)
+            {
+                <tr>
+                    <td>@user.UserName</td>
+                    <td>@user.Email</td>
+                    @foreach (var role in user.Roles)
+                    {
+                        <td>@role</td>
+                    }
+                    <td><a asp-action="EditUser" asp-route-id="@user.Id" asp-route-UserId="@user.Id" class="btn btn-info">Edit</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="card">
+        <div class="card-header">
+            No users created yet.
+        </div>
+        <div class="card-body">
+            <h5>
+                Use the button below to create a user
+            </h5>
+        </div>
+    </div>
+}

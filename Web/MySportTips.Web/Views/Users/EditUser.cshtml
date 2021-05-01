@@ -1,0 +1,67 @@
+﻿@using MySportTips.Common
+@model MySportTips.Web.ViewModels.Users.EditUserInputModel
+@{
+    this.ViewData["Title"] = "Edit event";
+}
+
+<h1>Edit game</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post" asp-action="EditUser">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input type="hidden" asp-for="UserId" />
+            </div>
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" readonly="readonly"/>
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" readonly="readonly" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            @if (Model.Roles.Count == 0)
+            {
+                <div class="form-group">
+                    <label>Role</label>
+                    <in class="form-control">User is without role.</in>
+                </div>
+            }
+            else
+            {
+                <div class="form-group">
+                    <div class="list-group">
+                        <label asp-for="OldRole"></label>
+                        <select asp-for="OldRole" class="form-control">
+                            @foreach (var role in Model.Roles)
+                            {
+                                <option value="@role">@role</option>
+                            }
+                        </select>
+                        <span asp-validation-for="OldRole" class="text-danger"></span>
+                    </div>
+                </div>
+            }
+            <div class="list-group">
+                <label asp-for="NewRole"></label>
+                <select asp-for="NewRole" class="form-control">
+                    <option value="@GlobalConstants.AdministratorRoleName">@GlobalConstants.AdministratorRoleName</option>
+                    <option value="@GlobalConstants.MemberRoleName">@GlobalConstants.MemberRoleName</option>
+                    <option value="@GlobalConstants.UserRoleName">@GlobalConstants.UserRoleName</option>
+                </select>
+                <span asp-validation-for="NewRole" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="ListUsers">Back to All Users</a>
+</div>

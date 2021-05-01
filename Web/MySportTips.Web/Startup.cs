@@ -1,4 +1,6 @@
-﻿namespace MySportTips.Web
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace MySportTips.Web
 {
     using System.Reflection;
 

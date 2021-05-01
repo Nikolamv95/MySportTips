@@ -12,6 +12,7 @@
             </li>*@
         if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
         {
+
             <li class="nav-item">
                 <a class="nav-link text-dark" asp-area="" asp-controller="Games" asp-action="AddGame">Add Game</a>
             </li>
@@ -20,6 +21,9 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link text-dark" asp-area="" asp-controller="Tips" asp-action="AllTips">All Tips</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="ListUsers">Users</a>
             </li>
         }
         <li class="nav-item">

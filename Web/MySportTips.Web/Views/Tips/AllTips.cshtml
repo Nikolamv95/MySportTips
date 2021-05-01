@@ -29,10 +29,16 @@
                 <a>Odd</a>
             </th>
             <th>
+                <a>Status</a>
+            </th>
+            <th>
                 <a>Time period</a>
             </th>
             <th>
                 <a>Info</a>
+            </th>
+            <th>
+                <a>Edit</a>
             </th>
         </tr>
     </thead>
@@ -40,13 +46,15 @@
         @foreach (var tip in @Model.Tips)
         {
             <tr>
-                <td>@tip.DateTime</td>
+                <td>@tip.DateTime.ToString("M")</td>
                 <td>@tip.CompetitionName</td>
                 <td><a>@tip.HomeTeamName</a> v <a>@tip.AwayTeamName</a></td>
                 <td>@tip.Selection</td>
                 <td>@tip.Odd</td>
+                <td>@tip.StatusName</td>
                 <td>@tip.TimePeriod</td>
-                <td><a asp-action="EditTip" asp-route-id="@tip.TipId" asp-route-TipId="@tip.TipId" class="btn btn-info">Edit</a></td>
+                <td><a asp-action="ById" asp-route-id="@tip.TipId" asp-route-TipId="@tip.TipId" class="btn btn-info">Info</a></td>
+                <td><a asp-action="EditTip" asp-route-id="@tip.TipId" asp-route-TipId="@tip.TipId" class="btn btn-danger">Edit</a></td>
             </tr>
         }
     </tbody>

@@ -100,6 +100,7 @@
         }
 
         [HttpGet]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName + "," + GlobalConstants.MemberRoleName)]
         public IActionResult AllCurrentTips()
         {
             var tipsViewModel = new ListTipsViewModel()
@@ -122,6 +123,7 @@
         }
 
         [HttpGet]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName + "," + GlobalConstants.MemberRoleName)]
         public IActionResult ById(int id)
         {
             var tipViewModel = this.tipService.GetById(id);
