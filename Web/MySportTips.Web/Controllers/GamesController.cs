@@ -46,7 +46,7 @@
                 return this.View();
             }
 
-            return this.Redirect("/Home/Index");
+            return this.RedirectToAction(nameof(this.AllGames));
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]

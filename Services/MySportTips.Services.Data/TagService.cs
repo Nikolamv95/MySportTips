@@ -55,8 +55,8 @@
                 throw new ArgumentException("This tag doesn't exist.");
             }
 
-            var country = this.tagRepository.All().FirstOrDefault(x => x.Name == name);
-            return country.Id;
+            var tag = this.tagRepository.All().FirstOrDefault(x => x.Name == name);
+            return tag.Id;
         }
     }
 }

@@ -20,5 +20,9 @@
         public AddTipInputModel MapAllTipItems(int gameId);
 
         public IEnumerable<KeyValuePair<string, string>> GetAllKeyValuePairsSelection();
+
+        public EditTipInputModel MapEditTipModel(int id);
+
+        public Task EditTipAsync(EditTipInputModel editTipInput);
     }
 }

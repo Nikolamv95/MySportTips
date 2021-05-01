@@ -39,7 +39,7 @@
                 <td>@tip.Selection</td>
                 <td>@tip.Odd</td>
                 <td>@tip.TimePeriod</td>
-                <td><a asp-action="ById" asp-route-id="@tip.TipId" class="btn btn-info">Read more</a></td>
+                <td><a asp-action="EditTip" asp-route-id="@tip.TipId" asp-route-TipId="@tip.TipId" class="btn btn-info">Edit</a></td>
             </tr>
         }
     </tbody>

@@ -50,8 +50,8 @@
                 throw new ArgumentException("This competition doesn't exist.");
             }
 
-            var country = this.competitionRepository.All().FirstOrDefault(x => x.Name == name);
-            return country.Id;
+            var competition = this.competitionRepository.All().FirstOrDefault(x => x.Name == name);
+            return competition.Id;
         }
 
         public IEnumerable<KeyValuePair<string, string>> GetAllKeyValuePairs()

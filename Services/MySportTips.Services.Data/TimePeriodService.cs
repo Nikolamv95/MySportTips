@@ -44,8 +44,18 @@
                 throw new ArgumentException("This timePeriod doesn't exist.");
             }
 
-            var country = this.timePeriodRepository.All().FirstOrDefault(x => x.Name == name);
-            return country.Id;
+            var timePeriod = this.timePeriodRepository.All().FirstOrDefault(x => x.Name == name);
+            return timePeriod.Id;
+        }
+
+        public TimePeriod GetTimePeriod(string name)
+        {
+            if (!this.IsTimePeriodExist(name))
+            {
+                throw new ArgumentException("This timePeriod doesn't exist.");
+            }
+
+            return this.timePeriodRepository.All().FirstOrDefault(x => x.Name == name);
         }
     }
 }

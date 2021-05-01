@@ -1,0 +1,58 @@
+﻿@model MySportTips.Web.ViewModels.Tips.EditTipInputModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit tip</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditTip">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input type="hidden" asp-for="TipId" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Selection" class="control-label"></label>
+                <input asp-for="Selection" class="form-control" />
+                <span asp-validation-for="Selection" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <textarea asp-for="Description" class="form-control" rows="6"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Odd" class="control-label"></label>
+                <input asp-for="Odd" class="form-control" />
+                <span asp-validation-for="Odd" class="text-danger"></span>
+            </div>
+            <div class="list-group">
+                <label asp-for="StatusName"></label>
+                <select asp-for="StatusName" class="form-control">
+                    <option value="Win">Win</option>
+                    <option value="Lost">Lost</option>
+                    <option value="Unknown">Unknown</option>
+                </select>
+                <span asp-validation-for="StatusName" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="list-group">
+                <label asp-for="TimePeriod"></label>
+                <select asp-for="TimePeriod" class="form-control">
+                    <option value="Currently playing">Currently playing</option>
+                    <option value="Finished">Finished</option>
+                </select>
+                <span asp-validation-for="TimePeriod" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="AllTips">Back to All Tips</a>
+</div>

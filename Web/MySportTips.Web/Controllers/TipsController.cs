@@ -1,13 +1,14 @@
 ﻿namespace MySportTips.Web.Controllers
 {
+    using System;
+    using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
     using MySportTips.Common;
     using MySportTips.Services.Data;
     using MySportTips.Web.ViewModels.Tips;
-    using System;
-    using System.Threading.Tasks;
 
     public class TipsController : BaseController
     {
@@ -49,7 +50,7 @@
                 return this.View(tipViewItems);
             }
 
-            return this.Redirect("/Home/Index");
+            return this.RedirectToAction(nameof(this.AllTips));
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
@@ -64,7 +65,6 @@
             return this.View(tipsViewModel);
         }
 
-        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         [HttpGet]
         public IActionResult AllCurrentTips()
         {
@@ -76,7 +76,6 @@
             return this.View(tipsViewModel);
         }
 
-        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         [HttpGet]
         public IActionResult AllPastTips()
         {
@@ -88,12 +87,25 @@
             return this.View(tipsViewModel);
         }
 
-        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         [HttpGet]
         public IActionResult ById(int id)
         {
             var tipViewModel = this.tipService.GetById(id);
             return this.View(tipViewModel);
+        }
+
+        [HttpGet]
+        public IActionResult EditTip(int id)
+        {
+            var editTipInputModel = this.tipService.MapEditTipModel(id);
+            return this.View(editTipInputModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditTip(EditTipInputModel editTipInputModel)
+        {
+            await this.tipService.EditTipAsync(editTipInputModel);
+            return this.RedirectToAction(nameof(this.AllTips));
         }
     }
 }

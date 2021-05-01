@@ -1,11 +1,10 @@
-﻿using System.Linq.Expressions;
-
-namespace MySportTips.Services.Data
+﻿namespace MySportTips.Services.Data
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Linq.Expressions;
     using System.Threading.Tasks;
 
     using MySportTips.Data.Common.Repositories;
@@ -82,17 +81,31 @@ namespace MySportTips.Services.Data
 
         public ICollection<TipViewModel> GetAllTips()
         {
-            return this.tipRepository.All().Select(MapAllTips()).ToList();
+            return this.tipRepository
+                .All()
+                .OrderByDescending(x => x.CreatedOn)
+                .Select(MapAllTips())
+                .ToList();
         }
 
         public ICollection<TipViewModel> GetAllCurrentTips()
         {
-            return this.tipRepository.All().Where(x => x.TimePeriod.Name == currentTips).Select(MapAllTips()).ToList();
+            return this.tipRepository
+                .All()
+                .Where(x => x.TimePeriod.Name == currentTips)
+                .OrderByDescending(x => x.CreatedOn)
+                .Select(MapAllTips())
+                .ToList();
         }
 
         public ICollection<TipViewModel> GetAllPastTips()
         {
-            return this.tipRepository.All().Where(x => x.TimePeriod.Name == pastTips).Select(MapAllTips()).ToList();
+            return this.tipRepository
+                .All()
+                .Where(x => x.TimePeriod.Name == pastTips)
+                .OrderByDescending(x => x.CreatedOn)
+                .Select(MapAllTips())
+                .ToList();
         }
 
         public TipViewModel GetById(int id)
@@ -136,10 +149,62 @@ namespace MySportTips.Services.Data
                     .Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Selection));
         }
 
-        private int GetTipIdByGame(int id)
+        public EditTipInputModel MapEditTipModel(int id)
         {
-            var tip = this.tipRepository.All().FirstOrDefault(x => x.GameId == id);
-            return tip.Id;
+            return this.tipRepository
+                .All()
+                .Where(x => x.Id == id)
+                .Select(x => new EditTipInputModel
+                {
+                    TipId = x.Id,
+                    Selection = x.Selection,
+                    Description = x.Description,
+                    Odd = x.Odd,
+                    StatusName = x.Status.Name,
+                    TimePeriod = x.TimePeriod.Name,
+                }).FirstOrDefault();
+        }
+
+        public async Task EditTipAsync(EditTipInputModel editTipInput)
+        {
+            var tip = this.tipRepository.All().FirstOrDefault(x => x.Id == editTipInput.TipId);
+
+            if (editTipInput.Description != null)
+            {
+                tip.Description = editTipInput.Description;
+            }
+
+            if (editTipInput.Selection != null)
+            {
+                tip.Selection = editTipInput.Selection;
+            }
+
+            if (editTipInput.Odd != null)
+            {
+                tip.Selection = editTipInput.Selection;
+            }
+
+            if (editTipInput.StatusName != null)
+            {
+                if (!this.statusService.IsStatusExist(editTipInput.StatusName))
+                {
+                    await this.statusService.AddStatusAsync(editTipInput.StatusName);
+                }
+
+                tip.StatusId = this.statusService.GetStatusId(editTipInput.StatusName);
+            }
+
+            if (editTipInput.TimePeriod != null)
+            {
+                if (!this.timePeriodService.IsTimePeriodExist(editTipInput.TimePeriod))
+                {
+                    await this.timePeriodService.AddTimePeriodAsync(editTipInput.TimePeriod);
+                }
+
+                tip.TimePeriodId = this.timePeriodService.GetTimePeriodId(editTipInput.TimePeriod);
+            }
+
+            await this.tipRepository.SaveChangesAsync();
         }
 
         private static Expression<Func<Tip, TipViewModel>> MapAllTips()
@@ -160,6 +225,12 @@ namespace MySportTips.Services.Data
                 StatusName = x.Status.Name,
                 TimePeriod = x.TimePeriod.Name,
             };
+        }
+
+        private int GetTipIdByGame(int id)
+        {
+            var tip = this.tipRepository.All().FirstOrDefault(x => x.GameId == id);
+            return tip.Id;
         }
     }
 }
