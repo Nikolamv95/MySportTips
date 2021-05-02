@@ -4,41 +4,87 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-<ul class="navbar-nav">
-    @if (this.SignInManager.IsSignedIn(this.User))
-    {
-        @*<li class="nav-item">
-                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @this.User.Identity.Name!</a>
-            </li>*@
-        if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
-        {
-
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Games" asp-action="AddGame">Add Game</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Games" asp-action="AllGames">All Games</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Tips" asp-action="AllTips">All Tips</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="ListUsers">Users</a>
-            </li>
-        }
-        <li class="nav-item">
-            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
-                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-            </form>
-        </li>
-    }
-    else
-    {
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
-        </li>
-    }
-</ul>
+<div id="navbar" class="header-bottom">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-3 col-lg-3 d-xl-flex d-lg-flex d-block align-items-center">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-6 d-xl-block d-lg-block d-flex align-items-center">
+                        <div class="logo">
+                            <a asp-controller="Home" asp-action="Index">
+                                <img src="~/theme/assets/img/Logo2.png" alt="logo">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-6 d-xl-none d-lg-none d-block">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-9 col-lg-9">
+                <div class="mainmenu">
+                    <nav class="navbar navbar-expand-lg">
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
+                                </li>
+                                @if (this.SignInManager.IsSignedIn(this.User))
+                                {
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Tips
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" asp-controller="Tips" asp-action="AllCurrentTips">Current tips</a>
+                                            <a class="dropdown-item" asp-controller="Tips" asp-action="AllPastTips">Past tips</a>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-controller="Games" asp-action="AllGames">Schedule</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-controller="Home" asp-action="ContactUs">Contact US</a>
+                                    </li>
+                                    @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                                    {
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Admin menu
+                                            </a>
+                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                                                <a class="dropdown-item" asp-controller="Games" asp-action="AddGame">Add game</a>
+                                                <a class="dropdown-item" asp-controller="Games" asp-action="AllGames">All games</a>
+                                                <a class="dropdown-item" asp-controller="Tips" asp-action="AddTip">Add tip</a>
+                                                <a class="dropdown-item" asp-controller="Tips" asp-action="AllTips">All tips</a>
+                                                <a class="dropdown-item" asp-controller="Users" asp-action="ListUsers">List users</a>
+                                            </div>
+                                        </li>
+                                    }
+                                }
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Profile
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                                        @if (!this.SignInManager.IsSignedIn(this.User))
+                                        {
+                                            <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                                            <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                                        }
+                                        else
+                                        {
+                                            <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@this.Url.Action("Index", "Home", new {area = string.Empty})">Logout</a>
+                                        }
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

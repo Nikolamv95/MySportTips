@@ -1,0 +1,96 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<!-- breadcrumb begin -->
+<div class="breadcrumb-bettix register-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-7 col-lg-7">
+                <div class="breadcrumb-content">
+                    <h2>Register</h2>
+                    <ul>
+                        <li>
+                            <a href="#">Home</a>
+                        </li>
+                        <li>
+                            <a href="#">Pages</a>
+                        </li>
+                        <li>
+                            Contact
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb end -->
+
+<!-- register begin -->
+<div class="register">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-7 col-lg-8 col-md-8">
+                <div class="section-title">
+                    <h2>Register To Predict Now</h2>
+                    <p>NDTips is the most advanced sports prediction website with high percentage of win rate.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-xl-9 col-lg-9">
+                <div class="sign-up-step">
+                    <ul>
+                        <li class="active">
+                            <span class="icon">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="user-circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" class="svg-inline--fa fa-user-circle fa-w-16 fa-fw fa-2x"><path fill="currentColor" d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm128 421.6c-35.9 26.5-80.1 42.4-128 42.4s-92.1-15.9-128-42.4V416c0-35.3 28.7-64 64-64 11.1 0 27.5 11.4 64 11.4 36.6 0 52.8-11.4 64-11.4 35.3 0 64 28.7 64 64v13.6zm30.6-27.5c-6.8-46.4-46.3-82.1-94.6-82.1-20.5 0-30.4 11.4-64 11.4S204.6 320 184 320c-48.3 0-87.8 35.7-94.6 82.1C53.9 363.6 32 312.4 32 256c0-119.1 96.9-216 216-216s216 96.9 216 216c0 56.4-21.9 107.6-57.4 146.1zM248 120c-48.6 0-88 39.4-88 88s39.4 88 88 88 88-39.4 88-88-39.4-88-88-88zm0 144c-30.9 0-56-25.1-56-56s25.1-56 56-56 56 25.1 56 56-25.1 56-56 56z" class=""></path></svg>
+                            </span>
+                            <span class="text">Getting Started</span>
+                        </li>
+                        <li id="final-confirm">
+                            <span class="icon">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="check-circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-check-circle fa-w-16 fa-fw fa-2x"><path fill="currentColor" d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 464c-118.664 0-216-96.055-216-216 0-118.663 96.055-216 216-216 118.664 0 216 96.055 216 216 0 118.663-96.055 216-216 216zm141.63-274.961L217.15 376.071c-4.705 4.667-12.303 4.637-16.97-.068l-85.878-86.572c-4.667-4.705-4.637-12.303.068-16.97l8.52-8.451c4.705-4.667 12.303-4.637 16.97.068l68.976 69.533 163.441-162.13c4.705-4.667 12.303-4.637 16.97.068l8.451 8.52c4.668 4.705 4.637 12.303-.068 16.97z" class=""></path></svg>
+                            </span>
+                            <span class="text">Almost Done</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="all-form">
+                    <div class="single-form" id="first-step">
+                        <h4>Create a new account.</h4>
+                        <hr/>
+                        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <div>
+                                <input asp-for="Input.Username" class="form-control" placeholder="Username"/>
+                                <span asp-validation-for="Input.Username" class="text-danger"></span>
+                            </div>
+                            <div>
+                                <input asp-for="Input.Email" class="form-control" placeholder="Email"/>
+                                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                            </div>
+                            <div>
+                                <input asp-for="Input.Password" class="form-control" placeholder="Password"/>
+                                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                            </div>
+                            <div>
+                                <input asp-for="Input.ConfirmPassword" class="form-control" placeholder="Confirm password"/>
+                                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                            </div>
+                            <p>By clicking "NEXT", you confirm that you have read and understood the NDTips <a href="#">Privacy & Coockie Policy</a>, and agree to its terms.</p>
+                            <button class="next" type="submit">Next</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- regsiter end -->
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

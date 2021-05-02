@@ -3,7 +3,211 @@
     this.ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!-- banner begin -->
+<div class="banner">
+    <div class="container">
+        <div class="banner-content">
+            <div class="row justify-content-xl-start justify-content-lg-center justify-content-md-center">
+                <div class="col-xl-7 col-lg-11 col-md-10 col-12 d-xl-flex d-lg-flex d-block align-items-center">
+                    <div class="text-content">
+                        <h1>NDTips on the great sports.</h1>
+                        <h4>that Coral offers for Football today.</h4>
+                        <p>We're football fanatics and inside our prediction hub you'll find all manner of game prediction, aids and insights on everything the game has to offer.</p>
+                        <div class="banner-button">
+                            <ul>
+                                <li>
+                                    <a asp-controller="Tips" asp-action="AllPastTips" class="bet-btn bet-btn-base">Check our tips</a>
+                                </li>
+                                <li>
+                                    <a asp-controller="Home" asp-action="Subscribe" class="bet-btn bet-btn-border">Subscribe</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-5 col-lg-4">
+                    <div class="banner-img">
+                        <img src="~/theme/assets/img/banner-img-2.png" alt="sport"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<!-- banner end -->
+<!-- about begin -->
+<div class="about">
+    <div class="container">
+        <div class="row no-gutters">
+            <div class="col-xl-8 col-lg-8">
+                <div class="part-img">
+                    <img src="~/theme/assets/img/about.jpg" alt="about" />
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 d-xl-flex d-lg-flex d-block align-items-center">
+                <div>
+                    <div class="part-text">
+                        <h2>Introducing Our Words</h2>
+                        <p>The bigger the sports event the more interest, excitement and media attention on the action. And the more betting markets we have available here at NDTips to turn your opinions into winning bets. And few events come any bigger than the World Cup and the Olympics.</p>
+                    </div>
+                    <a asp-controller="Tips" asp-action="AllPastTips" class="about-btn">Check our tips</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- about end -->
+<!-- cta begin -->
+<div class="cta">
+    <div class="container">
+        <h3>NDTips gives you the most interesting events backed up with exciting tips.</h3>
+        <div class="cta-btn-group">
+            <a asp-controller="Tips" asp-action="AllPastTips" class="bet-btn bet-btn-base">Check our tips</a>
+            <a asp-controller="Home" asp-action="Subscribe" class="bet-btn bet-btn-border">Subscribe</a>
+        </div>
+    </div>
+</div>
+<!-- cta end -->
+<!-- feature begin -->
+<div class="feature" id="feature_section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-lg-6 col-md-8">
+                <div class="section-title">
+                    <h2>NDTips Features</h2>
+                    <p>NDTips shows real time tips for betting with the best odds you can get. We place your bets in various bMakers to do highest liquidity</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-4 col-lg-4 col-md-6">
+                <div class="single-feature">
+                    <div class="part-icon">
+                        <img src="~/theme/assets/img/svg/music-and-multimedia.svg" alt="img">
+                    </div>
+                    <div class="part-text">
+                        <h3 class="title">Live Prediction</h3>
+                        <p>NDTips has a quality in-play Prediction service and the live console has extensive coverage from sporting events and prediction markets.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-6">
+                <div class="single-feature">
+                    <div class="part-icon">
+                        <img src="~/theme/assets/img/svg/usability.svg" alt="">
+                    </div>
+                    <div class="part-text">
+                        <h3 class="title">Clean Usability</h3>
+                        <p>More than a single feature, usability is an aspect that affects the whole product. For us, that means an intuitive interface that is easy to use.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-6">
+                <div class="single-feature">
+                    <div class="part-icon">
+                        <img src="~/theme/assets/img/svg/browser.svg" alt="">
+                    </div>
+                    <div class="part-text">
+                        <h3 class="title">Prediction browser</h3>
+                        <p>All the information you need is gathered on one single Prediction Browser using the software. Best tips with bets odds.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- feature end -->
+<!-- statics begin -->
+<div class="statics">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-3 col-lg-3 col-md-6">
+                <div class="single-counter">
+                    <span class="number odometer" data-count="1854">98</span>
+                    <span class="title">Tips so far</span>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-6">
+                <div class="single-counter">
+                    <span class="number odometer" data-count="3254">73</span>
+                    <span class="title">Won tips</span>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-6">
+                <div class="single-counter">
+                    <span class="number odometer" data-count="584">25</span>
+                    <span class="title">Lost tips</span>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-6">
+                <div class="single-counter">
+                    <span class="number odometer" data-count="1731">130</span>
+                    <span class="title">Satisfied Clients</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- statics end -->
+<!-- testimonial begin -->
+<div class="testimonial" id="testimonial">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-7 col-lg-7">
+                <div class="section-title">
+                    <h2>Feedback to NDTips</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-xl-8 col-lg-8">
+                <div class="testimonial-slider owl-carousel owl-theme">
+                    <div class="single-testimonial">
+                        <div class="part-img">
+                        </div>
+                        <div class="part-text">
+                            <i class="icon-for-quot fas fa-quote-left"></i>
+                            <p>Прогнозите са изключително добри. Получавах ги един ден преди събитието.</p>
+                            <span class="position">
+                                Player
+                            </span>
+                            <span class="user-name">
+                                Nikolai Ivanov
+                            </span>
+                        </div>
+                    </div>
+                    <div class="single-testimonial">
+                        <div class="part-img">
+                        </div>
+                        <div class="part-text">
+                            <i class="icon-for-quot fas fa-quote-left"></i>
+                            <p>Най-добрите прогнози за момента. Добри са.</p>
+                            <span class="position">
+                                Player
+                            </span>
+                            <span class="user-name">
+                                Marco Vasilv
+                            </span>
+                        </div>
+                    </div>
+                    <div class="single-testimonial">
+                        <div class="part-img">
+                            <img src="~/theme/assets/img/testi-user-1.jpg" />
+                        </div>
+                        <div class="part-text">
+                            <i class="icon-for-quot fas fa-quote-left"></i>
+                            <p>Понакога губят но сравнение с останалите сайтове са доста добре.</p>
+                            <span class="position">
+                                Player
+                            </span>
+                            <span class="user-name">
+                                Ivan Peltekov
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- testimonial end -->

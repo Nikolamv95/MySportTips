@@ -84,7 +84,6 @@
             return this.RedirectToAction(nameof(this.AllGames));
         }
 
-
         [HttpGet]
         [Authorize(Roles = GlobalConstants.AdministratorRoleName + "," + GlobalConstants.MemberRoleName)]
         public IActionResult AllGames()

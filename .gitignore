@@ -334,3 +334,11 @@ ASALocalRun/
 .localhistory/
 *.jpg
 *.png
+*.css
+*.js
+*.eot
+*.svg
+*.scss
+*.woff
+*.woff2
+Web/MySportTips.Web/wwwroot/theme/assets/img/preloader.gif

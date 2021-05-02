@@ -17,6 +17,16 @@
             return this.View();
         }
 
+        public IActionResult ContactUs()
+        {
+            return this.View();
+        }
+
+        public IActionResult Subscribe()
+        {
+            return this.View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
