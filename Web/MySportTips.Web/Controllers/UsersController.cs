@@ -92,6 +92,7 @@
             }
 
             await this.userManager.AddToRoleAsync(user, userInputModel.NewRole);
+            this.TempData["Message"] = "The user role was changed successfully.";
             return this.RedirectToAction(nameof(this.ListUsers));
         }
     }
