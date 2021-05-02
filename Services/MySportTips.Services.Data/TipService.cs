@@ -143,6 +143,7 @@
             return this.tipRepository
                     .All()
                     .Select(x => new { x.Id, x.Selection })
+                    .Distinct()
                     .OrderBy(x => x.Selection)
                     .ToList()
                     .Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Selection));

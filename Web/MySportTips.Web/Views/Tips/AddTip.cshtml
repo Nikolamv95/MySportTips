@@ -5,9 +5,30 @@
     var selectionItems = this.Model.SelectionItems.Select(x => new SelectListItem(x.Value, x.Key));
 }
 
-<div class="card card-primary">
+<!-- breadcrumb begin -->
+<div class="breadcrumb-bettix register-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-7 col-lg-7">
+                <div class="breadcrumb-content">
+                    <h2>Add Tip</h2>
+                    <ul>
+                        <li>
+                            <a asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li>
+                            Add tips
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb end -->
+<div class="card" style="background-color: #f5f5f5;">
     <div class="card-header">
-        <h3 class="card-title">Add Tip</h3>
+        <h3 class="card-title" style="text-align: center">Add Tip</h3>
     </div>
     <form method="post" asp-action="AddTip" enctype="multipart/form-data">
         <div asp-validation-summary="All" class="text-danger"></div>
@@ -82,8 +103,7 @@
             </div>
         </div>
         <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-danger">Submit</button>
         </div>
-
     </form>
 </div>

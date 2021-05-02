@@ -6,10 +6,30 @@
     var competitionItem = this.Model.CompetitionItems.Select(x => new SelectListItem(x.Value, x.Key));
     var teamItem = this.Model.TeamItems.Select(x => new SelectListItem(x.Value, x.Key));
 }
-
-<div class="card card-primary">
+<!-- breadcrumb begin -->
+<div class="breadcrumb-bettix register-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-7 col-lg-7">
+                <div class="breadcrumb-content">
+                    <h2>Add Game</h2>
+                    <ul>
+                        <li>
+                            <a asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li>
+                            Add Game
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb end -->
+<div class="card" style="background-color: #f5f5f5;">
     <div class="card-header">
-        <h3 class="card-title">Add Game</h3>
+        <h3 class="card-title" style="text-align: center">Add Game</h3>
     </div>
     <form method="post" asp-action="AddGame" enctype="application/x-www-form-urlencoded">
         <div asp-validation-summary="All" class="text-danger"></div>
@@ -91,7 +111,7 @@
                 </div>
                 <span asp-validation-for="HomeTeamName" class="text-danger"></span>
             </div>
-            <br/>
+            <br />
             <div>
                 <label asp-for="AwayTeamName"></label>
                 <div class="input-group">
@@ -111,7 +131,7 @@
             </div>
         </div>
         <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-danger">Submit</button>
         </div>
     </form>
 </div>

@@ -96,36 +96,148 @@
                 </div>
             </div>
         </div>
-        <partial name="_LoginPartial"/>
+        <partial name="_LoginPartial" />
     </div>
     <!-- header end -->
-
     @*<div class="container col-md-12">*@
-        <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3">
-            @this.RenderBody()
-        </main>
+    <partial name="_CookieConsentPartial" />
+    <main role="main" class="pb-3">
+        @this.RenderBody()
+    </main>
     @*</div>*@
 
 
-<!-- copyright footer begin -->
-<div class="copyright-footer">
-    <div class="container">
-        <div class="row justify-content-between">
-            <div class="col-xl-5 col-md-6 col-lg-6 d-lg-flex d-lg-flex d-block align-items-center">
-                <p class="copyright-text">
-                    <a href="#">NDTips</a> © 2021. PRIVACY POLICY
-                </p>
+    <!-- footer begin -->
+    <div class="footer" id="contact">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-xl-4 col-lg-5 col-md-10">
+                    <div class="about-widget">
+                        <a class="logo" href="index.html">
+                            <img src="~/theme/assets/img/Logo2.png" />
+                        </a>
+                        <p>NDTops offers you all the best online prediction from every corner of the planet with thousands of online prediction markets.</p>
+                        <div class="social">
+                            <ul>
+                                <li>
+                                    <a href="https://www.facebook.com/NDTips" class="social-icon">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+
+                                    <a href="https://www.instagram.com/ndtips/" class="social-icon">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                    <a href="https://www.telegram.org/ndtips/" class="social-icon">
+                                        <i class="fab fa-telegram"></i>
+                                    </a>
+
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="support">
+                            <ul>
+                                <li>
+                                    <span class="icon">
+                                        <img src="~/theme/assets/img/svg/email.svg" alt="">
+                                    </span>
+                                    <span class="text">
+                                        <span class="title">Mail Us</span>
+                                        <span class="descr">ndtips@gmail.com</span>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="icon">
+                                        <img src="~/theme/assets/img/svg/phone-call.svg" alt="">
+                                    </span>
+                                    <span class="text">
+                                        <span class="title">Get In Touch</span>
+                                        <span class="descr">+359888888999</span>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-3">
+                    <div class="useful-links">
+                        <h3>Useful links</h3>
+                        <ul>
+                            <li>
+                                <a class="dropdown-item" asp-controller="Tips" asp-action="AllPastTips">Past tips</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-controller="Tips" asp-action="AllCurrentTips">Current tips</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" asp-controller="Games" asp-action="AllGames">Schedule</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-3 col-md-3">
+                    <div class="useful-links">
+                        <h3>Connect With Us</h3>
+                        <ul>
+                            <li>
+                                <a href="#">About Us</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" asp-controller="Home" asp-action="ContactUs">Contact US</a>
+                            </li>
+                            @*<li>
+                                <a class="nav-link" asp-controller="Home" asp-action="Subscribe">Subscription</a>
+                            </li>*@
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-3">
+                    <div class="useful-links">
+                        <h3>Sport tips on</h3>
+                        <ul>
+                            <li>
+                                <a href="#">FOOTBALL</a>
+                            </li>
+                            <li>
+                                <a href="#">TENNIS</a>
+                            </li>
+                            <li>
+                                <a href="#">BASKETBALL</a>
+                            </li>
+                            <li>
+                                <a href="#">ICE HOCKEY</a>
+                            </li>
+                            <li>
+                                <a href="#">VOLLEYBALL</a>
+                            </li>
+                            <li>
+                                <a href="#">BADMINTON</a>
+                            </li>
+                            <li>
+                                <a href="#">BASEBALL</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="text-right col-md-6 col-xl-4 col-lg-6 d-xl-flex d-lg-flex d-block align-items-center">
-                <p class="copyright-text">
-                   <a>All rights reserved.</a>
-                </p>
+            <div class="row">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12">
+                            <div class="payment-method">
+                                <h6 class="payment-method-title">
+                                    Write us and subscribe for NDTips
+                                </h6>
+                                <div class="all-method">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- copyright footer end -->
+    <!-- footer end -->
+
     <!-- jquery -->
     <!-- <script src="assets/js/jquery.js"></script> -->
     <script src="~/theme/assets/js/jquery-3.4.1.min.js"></script>

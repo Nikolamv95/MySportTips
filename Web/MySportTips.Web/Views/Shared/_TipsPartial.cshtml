@@ -1,33 +1,4 @@
-﻿@model MySportTips.Web.ViewModels.Tips.ListTipsViewModel
-@{
-    this.ViewData["Title"] = "All Tips";
-}
-<!-- breadcrumb begin -->
-<div class="breadcrumb-bettix result-page">
-    <div class="container">
-        <div class="row">
-            <div class="col-xl-7 col-lg-7">
-                <div class="breadcrumb-content">
-                    <h2>Tips</h2>
-                    <ul>
-                        <li>
-                            <a asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li>
-                            Tips
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- breadcrumb end -->
-@if (this.TempData.ContainsKey("Message"))
-{
-    <div class="alert alert-success">@this.TempData["Message"]</div>
-}
-<!-- result begin -->
+﻿<!-- result begin -->
 <div class="result">
     <div class="container">
         <div class="result-sheet-cover">
@@ -74,23 +45,7 @@
                                     <td class="score">@tip.StatusName</td>
                                 }
                                 <td class="scorewin">@tip.TimePeriod</td>
-                                <td>
-                                    <nav class="navbar navbar-expand-lg">
-                                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                            <ul class="navbar-nav ml-auto">
-                                                <li class="nav-item dropdown">
-                                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        Menu
-                                                    </a>
-                                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                        <a asp-action="ById" asp-route-id="@tip.TipId" asp-route-TipId="@tip.TipId" class="dropdown-item">Info</a>
-                                                        <a asp-action="EditTip" asp-route-id="@tip.TipId" asp-route-TipId="@tip.TipId" class="dropdown-item">Edit</a>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </nav>
-                                </td>
+                                <td><a asp-action="ById" asp-route-id="@tip.TipId" asp-route-TipId="@tip.TipId" class="btn btn-outline-danger">Info</a></td>
                             </tr>
                         }
                     </tbody>
