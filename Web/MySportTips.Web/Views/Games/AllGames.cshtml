@@ -70,10 +70,14 @@
                                                         Menu
                                                     </a>
                                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                        <a asp-action="EditGame" asp-route-id="@game.GameId" asp-route-GameId="@game.GameId" class="dropdown-item">Edit</a>
                                                         @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
                                                         {
+                                                            <a asp-action="EditGame" asp-route-id="@game.GameId" asp-route-GameId="@game.GameId" class="dropdown-item">Edit</a>
                                                             <a asp-controller="Tips" asp-action="AddTip" asp-route-id="@game.GameId" asp-route-GameId="@game.GameId" class="dropdown-item">Add Tip</a>
+                                                        }
+                                                        @if (this.User.IsInRole(GlobalConstants.MemberRoleName))
+                                                        {
+                                                            <a asp-action="ById" asp-route-id="@game.GameId" asp-route-GameId="@game.GameId" class="dropdown-item">Info</a>
                                                         }
                                                     </div>
                                                 </li>
