@@ -1,0 +1,56 @@
+﻿<div class="result">
+    <div class="container">
+        <div class="result-sheet-cover">
+            <div class="result-sheet">
+                <h4 class="result-title">All Past Sport Tips</h4>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Date & Time</th>
+                            <th scope="col">Competition</th>
+                            <th scope="col">Event</th>
+                            <th scope="col">Selection</th>
+                            <th scope="col">Odd</th>
+                            <th scope="col">Win/Lost</th>
+                            <th scope="col">Period</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var tip in @Model.Tips)
+                        {
+                            <tr>
+                                <th scope="row">
+                                    <span class="icon">
+                                        <i class="flaticon-football"></i>
+                                    </span>
+                                </th>
+                                <td class="date">@tip.DateTime.ToString("M")</td>
+                                <td class="date">@tip.CompetitionName</td>
+                                <td class="team-name">@tip.HomeTeamName<span class="versace">vs</span> @tip.AwayTeamName</td>
+                                <td class="team-name">@tip.Selection</td>
+                                <td class="score">@tip.Odd.ToString("F")</td>
+                                @if (tip.StatusName == "WIN")
+                                {
+                                    <td class="score">@tip.StatusName</td>
+                                }
+                                else if (tip.StatusName == "LOST")
+                                {
+                                    <td class="score">@tip.StatusName</td>
+                                }
+                                else
+                                {
+                                    <td class="score">@tip.StatusName</td>
+                                }
+                                <td class="scorewin">@tip.TimePeriod</td>
+                                <td><a asp-action="ById" asp-route-id="@tip.TipId" asp-route-TipId="@tip.TipId" class="btn btn-outline-danger">Info</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

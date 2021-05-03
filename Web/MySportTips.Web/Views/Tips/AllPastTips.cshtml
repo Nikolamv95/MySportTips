@@ -1,4 +1,5 @@
-﻿@model MySportTips.Web.ViewModels.Tips.ListTipsViewModel
+﻿@using MySportTips.Common
+@model MySportTips.Web.ViewModels.Tips.ListTipsViewModel
 @{
     this.ViewData["Title"] = "All Past Tips";
 }
@@ -8,7 +9,7 @@
         <div class="row">
             <div class="col-xl-7 col-lg-7">
                 <div class="breadcrumb-content">
-                    <h2>Tips</h2>
+                    <h2>Past Tips</h2>
                     <ul>
                         <li>
                             <a asp-controller="Home" asp-action="Index">Home</a>
@@ -23,55 +24,50 @@
     </div>
 </div>
 <!-- breadcrumb end -->
-<!-- result begin -->
-<div class="result">
+<div class="schedule">
     <div class="container">
-        <div class="result-sheet-cover">
-            <div class="result-sheet">
-                <h4 class="result-title">All Past Sport Tips</h4>
-                <partial name="_TipsPartial" />
-                <div class="bettix-pagination">
-                    <ul>
-                        @if (!Model.HasPreviousPage && Model.PageNumber != 1)
-                        {
-                            <li>
-                                <a asp-controller="Tips" asp-action="AllPastTips" asp-route-id="@Model.PreviousPageNumber">
-                                    <i class="fas fa-chevron-left"></i>
-                                </a>
-                            </li>
-                        }
-                        @for (int i = Model.PageNumber - 2; i < Model.PageNumber; i++)
-                        {
-                            if (i > 0)
-                            {
-                                <li><a asp-controller="Tips" asp-action="AllPastTips" asp-route-id="@i">@i</a></li>
-                            }
-                        }
-                        <li>
-                            <a>
-                                @Model.PageNumber
-                            </a>
-                        </li>
-                        @for (int i = Model.PageNumber + 1; i < Model.PageNumber + 3; i++)
-                        {
+        <partial name="_NewViewTipsPartial" />
+        <!--Pagination-->
+        <div class="bettix-pagination">
+            <ul>
+                @if (!Model.HasPreviousPage && Model.PageNumber != 1)
+                {
+                    <li>
+                        <a asp-controller="Tips" asp-action="AllPastTips" asp-route-id="@Model.PreviousPageNumber">
+                            <i class="fas fa-chevron-left"></i>
+                        </a>
+                    </li>
+                }
+                @for (int i = Model.PageNumber - 2; i < Model.PageNumber; i++)
+                {
+                    if (i > 0)
+                    {
+                        <li><a asp-controller="Tips" asp-action="AllPastTips" asp-route-id="@i">@i</a></li>
+                    }
+                }
+                <li>
+                    <a>
+                        @Model.PageNumber
+                    </a>
+                </li>
+                @for (int i = Model.PageNumber + 1; i < Model.PageNumber + 3; i++)
+                {
 
-                            if (i <= Model.PagesCount)
-                            {
-                                <li><a asp-controller="Tips" asp-action="AllPastTips" asp-route-id="@i">@i</a></li>
-                            }
-                        }
-                        @if (!Model.HasPreviousPage && Model.PageNumber != Model.PagesCount)
-                        {
-                            <li>
-                                <a asp-controller="Tips" asp-action="AllPastTips" asp-route-id="@Model.NextPageNumber">
-                                    <i class="fas fa-chevron-right"></i>
-                                </a>
-                            </li>
-                        }
-                    </ul>
-                </div>
-            </div>
+                    if (i <= Model.PagesCount)
+                    {
+                        <li><a asp-controller="Tips" asp-action="AllPastTips" asp-route-id="@i">@i</a></li>
+                    }
+                }
+                @if (!Model.HasPreviousPage && Model.PageNumber != Model.PagesCount)
+                {
+                    <li>
+                        <a asp-controller="Tips" asp-action="AllPastTips" asp-route-id="@Model.NextPageNumber">
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </li>
+                }
+            </ul>
         </div>
+        <!--Pagination-->
     </div>
 </div>
-<!-- result end -->

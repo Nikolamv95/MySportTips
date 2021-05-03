@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 
 namespace MySportTips.Web
 {
@@ -25,6 +26,7 @@ namespace MySportTips.Web
 
     public class Startup
     {
+        public IConfiguration Configuration { get; }
         private readonly IConfiguration configuration;
 
         public Startup(IConfiguration configuration)
@@ -75,6 +77,7 @@ namespace MySportTips.Web
             services.AddTransient<IStatusService, StatusService>();
             services.AddTransient<ITagService, TagService>();
             services.AddTransient<ITimePeriodService, TimePeriodService>();
+            //services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_CONNECTIONSTRING"]);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

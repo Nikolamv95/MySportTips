@@ -1,0 +1,41 @@
+﻿@using MySportTips.Common
+<!--Start boxes-->
+<div class="row">
+    @foreach (var tip in Model.Tips)
+    {
+        <div class="col-xl-6 col-lg-6">
+            <div class="single-match">
+                <div class="part-head">
+                    <h5 class="match-title">@tip.CompetitionName</h5>
+                    <span class="match-venue">@tip.DateTime.ToString("yyyy MMMM dd")</span> /
+                    <span class="match-venue">@tip.DateTime.AddHours(3).ToString("t") <small>GMT +3</small></span>
+                </div>
+                <div class="part-team">
+                    <div class="single-team">
+                        <div class="logo">
+                            <img src="~/theme/assets/img/team2.png" alt="">
+                        </div>
+                        <span class="team-name">@tip.HomeTeamName</span>
+                    </div>
+                    <div class="match-details">
+                        <div class="match-time">
+                            <span class="date">@tip.Selection</span>
+                            <span class="time">@tip.StatusName</span>
+                        </div>
+                        <span class="versase">vs</span>
+                        <div class="buttons">
+                            <a asp-controller="Tips" asp-action="ById" asp-route-id="@tip.TipId" asp-route-GameId="@tip.TipId" class="buy-ticket bet-btn bet-btn-dark-light">Read more</a>
+                        </div>
+                    </div>
+                    <div class="single-team">
+                        <div class="logo">
+                            <img src="~/theme/assets/img/Team3.png"/>
+                        </div>
+                        <span class="team-name">@tip.AwayTeamName</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<!--End boxes-->
