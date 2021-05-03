@@ -9,11 +9,9 @@
     {
         public Task CreateTipAsync(AddTipInputModel tipInputModel, string imagePath);
 
-        public ICollection<TipViewModel> GetAllTips();
+        public ICollection<TipViewModel> GetAllTips(int page, int itemsPerPage);
 
-        public ICollection<TipViewModel> GetAllCurrentTips();
-
-        public ICollection<TipViewModel> GetAllPastTips();
+        public ICollection<TipViewModel> GetAllCurrentPastTips(string timePeriod, int page, int itemsPerPage);
 
         public TipViewModel GetById(int id);
 
@@ -24,5 +22,7 @@
         public EditTipInputModel MapEditTipModel(int id);
 
         public Task EditTipAsync(EditTipInputModel editTipInput);
+
+        public int GetCount();
     }
 }

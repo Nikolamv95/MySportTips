@@ -12,6 +12,7 @@
 
     public class TipsController : BaseController
     {
+        private const int ItemsPerPage = 10;
         private readonly ITipService tipService;
         private readonly IWebHostEnvironment environment;
 
@@ -89,11 +90,19 @@
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         [HttpGet]
-        public IActionResult AllTips()
+        public IActionResult AllTips(int id = 1)
         {
+            if (id <= 0)
+            {
+                return this.NotFound();
+            }
+
             var tipsViewModel = new ListTipsViewModel()
             {
-                Tips = this.tipService.GetAllTips(),
+                PageNumber = id,
+                Tips = this.tipService.GetAllTips(id, ItemsPerPage),
+                EventsCount = this.tipService.GetCount(),
+                ItemsPerPage = ItemsPerPage,
             };
 
             return this.View(tipsViewModel);
@@ -101,22 +110,40 @@
 
         [HttpGet]
         [Authorize(Roles = GlobalConstants.AdministratorRoleName + "," + GlobalConstants.MemberRoleName)]
-        public IActionResult AllCurrentTips()
+        public IActionResult AllCurrentTips(int id = 1)
         {
+            if (id <= 0)
+            {
+                return this.NotFound();
+            }
+
+            const string timePeriod = GameGlobalConstants.PeriodCurrentlyPlaying;
             var tipsViewModel = new ListTipsViewModel()
             {
-                Tips = this.tipService.GetAllCurrentTips(),
+                PageNumber = id,
+                Tips = this.tipService.GetAllCurrentPastTips(timePeriod, id, ItemsPerPage),
+                EventsCount = this.tipService.GetCount(),
+                ItemsPerPage = ItemsPerPage,
             };
 
             return this.View(tipsViewModel);
         }
 
         [HttpGet]
-        public IActionResult AllPastTips()
+        public IActionResult AllPastTips(int id = 1)
         {
+            if (id <= 0)
+            {
+                return this.NotFound();
+            }
+
+            const string timePeriod = GameGlobalConstants.PeriodFinished;
             var tipsViewModel = new ListTipsViewModel()
             {
-                Tips = this.tipService.GetAllPastTips(),
+                PageNumber = id,
+                Tips = this.tipService.GetAllCurrentPastTips(timePeriod, id, ItemsPerPage),
+                EventsCount = this.tipService.GetCount(),
+                ItemsPerPage = ItemsPerPage,
             };
 
             return this.View(tipsViewModel);

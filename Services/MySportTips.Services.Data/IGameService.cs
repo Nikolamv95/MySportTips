@@ -11,7 +11,7 @@
 
         public AddGameInputModel MapAllGameItems();
 
-        public ICollection<GameViewModel> GetAllGamesOrderByAddDate();
+        public ICollection<GameViewModel> GetAllGamesOrderByAddDate(int page, int itemsPerPage = 10);
 
         public GameViewModel GetById(int id);
 
@@ -20,5 +20,7 @@
         public EditGameInputModel MapEditGameModel(int id);
 
         public Task EditGameAsync(EditGameInputModel gameInputModel);
+
+        public int GetCount();
     }
 }

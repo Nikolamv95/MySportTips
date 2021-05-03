@@ -2,3 +2,115 @@
 @{
     this.ViewData["Title"] = "Event";
 }
+<!-- breadcrumb begin -->
+<div class="breadcrumb-bettix result-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-7 col-lg-7">
+                <div class="breadcrumb-content">
+                    <h2>Games</h2>
+                    <ul>
+                        <li>
+                            <a asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Games" asp-action="AllGames">All Games</a>
+                        </li>
+                        <li>
+                            Current game
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb end -->
+<!-- upcoming match begin -->
+<div class="upcoming-match" id="upcoming_match">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-lg-6 col-md-8">
+                <div class="section-title">
+                    <h2>Upcoming event</h2>
+                    <p>NDTips gives you the best tips for betting and statistic after every game.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-6 col-lg-6">
+                <div class="single-match">
+                    <div class="part-head">
+                        <h5 class="match-title">@Model.CompetitionName</h5>
+                        <span class="match-venue">@Model.CountryName</span>
+                    </div>
+                    <div class="part-team">
+                        <div class="single-team">
+                            <div class="logo">
+                                <img src="~/theme/assets/img/team2.png" alt="">
+                            </div>
+                            <span class="team-name">@Model.HomeTeamName</span>
+                        </div>
+                        <div class="match-details">
+                            <div class="match-time">
+                                <span class="date">@Model.DateTime.ToString("D")</span>
+                                <span class="time">@Model.DateTime.AddHours(3).ToString("t") <small>GMT +3</small></span>
+                            </div>
+                            <span class="versase">vs</span>
+                            <div class="buttons">
+                                @if (this.Model.Result != null)
+                                {
+                                    <a class="buy-ticket bet-btn bet-btn-dark-light" style="color: aliceblue">@Model.Result</a>
+                                }
+                                else
+                                {
+                            <a class="buy-ticket bet-btn bet-btn-dark-light" style="color: aliceblue">No result yet</a>
+                                }
+                            </div>
+                        </div>
+                        <div class="single-team">
+                            <div class="logo">
+                                <img src="~/theme/assets/img/Team3.png" alt="">
+                            </div>
+                            <span class="team-name">@Model.AwayTeamName</span>
+                        </div>
+                    </div>
+                    <span class="to-begin-time">
+                    </span>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-6">
+                <div class="upcoming-match-list">
+                    <div class="single-upcoming-match">
+                        <div class="single-team">
+                            <div class="part-logo">
+                                <p></p>
+                            </div>
+                            <div class="part-text">
+                                <span class="team-name">
+                                    @if (this.Model.Statistic != null)
+                                    {
+                                        <a>@Model.Statistic</a>
+                                    }
+                                    else
+                                    {
+                                        <a>Currently there is no statistic for this event.</a>
+                                    }
+                                </span>
+                            </div>
+                        </div>
+                   </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <a asp-controller="Tips" asp-action="AllCurrentTips" class="vew-more-news bet-btn bet-btn-dark-light">
+                <i class="fas fa-redo"></i> See all current tips
+            </a>
+        </div>
+        <span class="text-special">
+            <b>Note:</b>  The timing of each match will depend on the weather conditions.
+        </span>
+    </div>
+</div>
+<!-- upcoming match end -->

@@ -2,7 +2,9 @@
 {
     using System.Collections.Generic;
 
-    public class ListTipsViewModel
+    using MySportTips.Web.ViewModels.Global;
+
+    public class ListTipsViewModel : PagingViewModel
     {
         public ICollection<TipViewModel> Tips { get; set; }
     }

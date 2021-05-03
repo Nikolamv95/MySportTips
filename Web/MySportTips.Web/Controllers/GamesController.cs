@@ -86,11 +86,21 @@
 
         [HttpGet]
         [Authorize(Roles = GlobalConstants.AdministratorRoleName + "," + GlobalConstants.MemberRoleName)]
-        public IActionResult AllGames()
+        public IActionResult AllGames(int id = 1)
         {
+            if (id <= 0)
+            {
+                return this.NotFound();
+            }
+
+            const int itemsPerPage = 8;
+
             var gamesViewModel = new ListGamesViewModel()
             {
-                Games = this.gameService.GetAllGamesOrderByAddDate(),
+                PageNumber = id,
+                Games = this.gameService.GetAllGamesOrderByAddDate(id, itemsPerPage),
+                EventsCount = this.gameService.GetCount(),
+                ItemsPerPage = itemsPerPage,
             };
 
             return this.View(gamesViewModel);

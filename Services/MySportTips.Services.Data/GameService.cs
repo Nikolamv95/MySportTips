@@ -78,24 +78,28 @@
             };
         }
 
-        public ICollection<GameViewModel> GetAllGamesOrderByAddDate()
+        public ICollection<GameViewModel> GetAllGamesOrderByAddDate(int page, int itemsPerPage = 8)
         {
-            return this.gameRepository
-                .All()
-                .OrderByDescending(x => x.CreatedOn)
-                .Select(x => new GameViewModel()
-                {
-                    GameId = x.Id,
-                    DateTime = x.DateTime,
-                    SportName = x.Sport.Name,
-                    CountryName = x.Country.Name,
-                    CompetitionName = x.Competition.Name,
-                    HomeTeamName = x.HomeTeam.Name,
-                    AwayTeamName = x.AwayTeam.Name,
-                    Result = x.Result,
-                    Statistic = x.Statistics,
-                })
-                .ToList();
+            var games = this.gameRepository
+               .All()
+               .OrderByDescending(x => x.CreatedOn)
+               .Skip((page - 1) * itemsPerPage)
+               .Take(itemsPerPage)
+               .Select(x => new GameViewModel()
+               {
+                   GameId = x.Id,
+                   DateTime = x.DateTime,
+                   SportName = x.Sport.Name,
+                   CountryName = x.Country.Name,
+                   CompetitionName = x.Competition.Name,
+                   HomeTeamName = x.HomeTeam.Name,
+                   AwayTeamName = x.AwayTeam.Name,
+                   Result = x.Result,
+                   Statistic = x.Statistics,
+               })
+               .ToList();
+
+            return games;
         }
 
         public GameViewModel GetById(int id)
@@ -212,6 +216,11 @@
             }
 
             await this.gameRepository.SaveChangesAsync();
+        }
+
+        public int GetCount()
+        {
+            return this.gameRepository.All().Count();
         }
     }
 }

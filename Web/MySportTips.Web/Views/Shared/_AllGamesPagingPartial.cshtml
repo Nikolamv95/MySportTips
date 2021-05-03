@@ -1,0 +1,41 @@
+﻿@model MySportTips.Web.ViewModels.Global.PagingViewModel
+<div class="bettix-pagination">
+    <ul>
+        @if (!Model.HasPreviousPage && Model.PageNumber != 1)
+        {
+            <li>
+                <a asp-controller="Games" asp-action="AllGames" asp-route-id="@Model.PreviousPageNumber">
+                    <i class="fas fa-chevron-left"></i>
+                </a>
+            </li>
+        }
+        @for (int i = Model.PageNumber - 2; i < Model.PageNumber; i++)
+        {
+            if (i > 0)
+            {
+                <li><a asp-action="AllGames" asp-route-id="@i">@i</a></li>
+            }
+        }
+        <li>
+            <a>
+                @Model.PageNumber
+            </a>
+        </li>
+        @for (int i = Model.PageNumber + 1; i < Model.PageNumber + 3; i++)
+        {
+
+            if (i <= Model.PagesCount)
+            {
+                <li><a asp-action="AllGames" asp-route-id="@i">@i</a></li>
+            }
+        }
+        @if (!Model.HasPreviousPage && Model.PageNumber != Model.PagesCount)
+        {
+            <li>
+                <a asp-controller="Games" asp-action="AllGames" asp-route-id="@Model.NextPageNumber" class="active @if (!Model.HasPreviousPage) {<text>disabled</text>}">
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            </li>
+        }
+    </ul>
+</div>

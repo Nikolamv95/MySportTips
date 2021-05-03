@@ -8,5 +8,7 @@
         public const string CompetitionName = "Competition";
         public const string HomeTeamName = "Home team";
         public const string AwayTeamName = "Away team";
+        public const string PeriodCurrentlyPlaying = "Currently playing";
+        public const string PeriodFinished = "Finished";
     }
 }

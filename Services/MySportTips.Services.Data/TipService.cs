@@ -78,30 +78,24 @@
             await this.tipTagRepository.SaveChangesAsync();
         }
 
-        public ICollection<TipViewModel> GetAllTips()
+        public ICollection<TipViewModel> GetAllTips(int page, int itemsPerPage)
         {
             return this.tipRepository
                 .All()
                 .OrderByDescending(x => x.CreatedOn)
+                .Skip((page - 1) * itemsPerPage)
+                .Take(itemsPerPage)
                 .Select(MapAllTips())
                 .ToList();
         }
 
-        public ICollection<TipViewModel> GetAllCurrentTips()
+        public ICollection<TipViewModel> GetAllCurrentPastTips(string timePeriod, int page, int itemsPerPage)
         {
             return this.tipRepository
                 .All()
-                .Where(x => x.TimePeriod.Name == currentTips)
-                .OrderByDescending(x => x.CreatedOn)
-                .Select(MapAllTips())
-                .ToList();
-        }
-
-        public ICollection<TipViewModel> GetAllPastTips()
-        {
-            return this.tipRepository
-                .All()
-                .Where(x => x.TimePeriod.Name == pastTips)
+                .Where(x => x.TimePeriod.Name == timePeriod)
+                .Skip((page - 1) * itemsPerPage)
+                .Take(itemsPerPage)
                 .OrderByDescending(x => x.CreatedOn)
                 .Select(MapAllTips())
                 .ToList();
@@ -198,6 +192,11 @@
             }
 
             await this.tipRepository.SaveChangesAsync();
+        }
+
+        public int GetCount()
+        {
+            return this.tipRepository.All().Count();
         }
 
         private static Expression<Func<Tip, TipViewModel>> MapAllTips()
