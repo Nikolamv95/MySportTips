@@ -33,5 +33,17 @@
             return this.View(
                 new ErrorViewModel { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
         }
+
+        public IActionResult StatusCodeError(int errorCode)
+        {
+            if (errorCode == 404)
+            {
+                return this.View();
+            }
+            else
+            {
+                return this.Redirect("Error");
+            }
+        }
     }
 }

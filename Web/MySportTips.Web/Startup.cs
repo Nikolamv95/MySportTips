@@ -97,6 +97,7 @@ namespace MySportTips.Web
             }
             else
             {
+                app.UseStatusCodePagesWithRedirects("/Home/StatusCodeError?errorCode={0}");
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
