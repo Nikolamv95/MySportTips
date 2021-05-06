@@ -40,10 +40,19 @@
             {
                 return this.View();
             }
+            else if (errorCode == 403)
+            {
+                return this.RedirectToAction(nameof(this.AccessDenied));
+            }
             else
             {
                 return this.Redirect("Error");
             }
+        }
+
+        public IActionResult AccessDenied()
+        {
+            return this.View();
         }
     }
 }

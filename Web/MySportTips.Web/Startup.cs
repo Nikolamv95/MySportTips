@@ -50,6 +50,11 @@ namespace MySportTips.Web
                         options.MinimumSameSitePolicy = SameSiteMode.None;
                     });
 
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.AccessDeniedPath = new PathString("/home/AccessDenied/");
+            });
+
             services.AddControllersWithViews(
                 options =>
                     {
