@@ -49,11 +49,8 @@ namespace MySportTips.Web.Controllers
             content.AppendLine($"User with email: {contactUsInput.Email} sent the following message:");
             content.AppendLine($"{contactUsInput.Content}");
 
-            await this.emailSender
-                .SendEmailAsync(
-                    GlobalConstants.SystemEmail,
-                    contactUsInput.FullName, GlobalConstants.SystemEmail,
-                    contactUsInput.SubjectLine, content.ToString());
+            await this.emailSender.SendEmailAsync(GlobalConstants.SystemEmail, contactUsInput.FullName,
+                GlobalConstants.SystemEmail, contactUsInput.SubjectLine, content.ToString());
 
             this.TempData["Message"] = "The email was sent successfully.";
             return this.RedirectToAction(nameof(this.Index));
