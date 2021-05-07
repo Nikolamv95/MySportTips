@@ -1,12 +1,25 @@
-﻿namespace MySportTips.Web.Controllers
+﻿using System.Text;
+
+namespace MySportTips.Web.Controllers
 {
     using System.Diagnostics;
+    using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
+    using MySportTips.Common;
+    using MySportTips.Services.Messaging;
     using MySportTips.Web.ViewModels;
+    using MySportTips.Web.ViewModels.Home;
 
     public class HomeController : BaseController
     {
+        private readonly IEmailSender emailSender;
+
+        public HomeController(IEmailSender emailSender)
+        {
+            this.emailSender = emailSender;
+        }
+
         public IActionResult Index()
         {
             return this.View();
@@ -17,9 +30,33 @@
             return this.View();
         }
 
+        [HttpGet]
         public IActionResult ContactUs()
         {
             return this.View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ContactUs(ContactUsInputModel contactUsInput)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View();
+            }
+
+            var content = new StringBuilder();
+            content.AppendLine($"User with email: {contactUsInput.Email} sent the following message:");
+            content.AppendLine($"{contactUsInput.Content}");
+
+            await this.emailSender
+                .SendEmailAsync(
+                    GlobalConstants.SystemEmail,
+                    contactUsInput.FullName, GlobalConstants.SystemEmail,
+                    contactUsInput.SubjectLine, content.ToString());
+
+            this.TempData["Message"] = "The email was sent successfully.";
+            return this.RedirectToAction(nameof(this.Index));
         }
 
         public IActionResult Subscribe()

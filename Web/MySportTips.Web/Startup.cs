@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
-
-namespace MySportTips.Web
+﻿namespace MySportTips.Web
 {
     using System.Reflection;
 
@@ -27,6 +24,7 @@ namespace MySportTips.Web
     public class Startup
     {
         public IConfiguration Configuration { get; }
+
         private readonly IConfiguration configuration;
 
         public Startup(IConfiguration configuration)
@@ -71,7 +69,7 @@ namespace MySportTips.Web
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
             // Application services
-            services.AddTransient<IEmailSender, NullMessageSender>();
+            services.AddTransient<IEmailSender>(serviceProvider => new SendGridEmailSender(this.configuration["SendGrid:ApiKey"]));
             services.AddTransient<ITipService, TipService>();
             services.AddTransient<IGameService, GameService>();
             services.AddTransient<ISportService, SportService>();
@@ -82,7 +80,8 @@ namespace MySportTips.Web
             services.AddTransient<IStatusService, StatusService>();
             services.AddTransient<ITagService, TagService>();
             services.AddTransient<ITimePeriodService, TimePeriodService>();
-            //services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_CONNECTIONSTRING"]);
+
+            // services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_CONNECTIONSTRING"]);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

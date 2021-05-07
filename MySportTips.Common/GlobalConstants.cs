@@ -7,5 +7,6 @@
         public const string AdministratorRoleName = "Administrator";
         public const string MemberRoleName = "Member";
         public const string UserRoleName = "User";
+        public const string SystemEmail = "ljuice@wavleg.com";
     }
 }

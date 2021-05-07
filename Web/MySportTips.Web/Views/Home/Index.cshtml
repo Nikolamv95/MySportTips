@@ -27,7 +27,7 @@
                 </div>
                 <div class="col-xl-5 col-lg-4">
                     <div class="banner-img">
-                        <img src="~/theme/assets/img/banner-img-2.png" alt="sport"/>
+                        <img src="~/theme/assets/img/banner-img-2.png" alt="sport" />
                     </div>
                 </div>
             </div>
@@ -35,6 +35,10 @@
     </div>
 </div>
 <!-- banner end -->
+@if (this.TempData.ContainsKey("Message"))
+{
+    <div class="alert alert-success">@this.TempData["Message"]</div>
+}
 <!-- about begin -->
 <div class="about">
     <div class="container">

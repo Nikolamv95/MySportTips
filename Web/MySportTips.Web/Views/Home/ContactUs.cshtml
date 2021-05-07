@@ -1,4 +1,8 @@
-﻿        <!-- breadcrumb begin -->
+﻿@model MySportTips.Web.ViewModels.Home.ContactUsInputModel
+@{
+    ViewData["Title"] = "Contact Us";
+}
+<!-- breadcrumb begin -->
 <div class="breadcrumb-bettix contact-page">
     <div class="container">
         <div class="row">
@@ -26,34 +30,40 @@
             <div class="col-xl-6 col-lg-6 col-md-8">
                 <div class="section-title">
                     <h2>Get In Touch</h2>
-                    <p>NDTops is the most advanced sports trading & game prediction platform. Feel free to contact us.</p>
+                    <p>NDTips is the most advanced sports trading & game prediction platform. Feel free to contact us.</p>
                 </div>
             </div>
         </div>
         <div class="row no-gutters">
             <div class="col-xl-8 col-lg-8 col-md-7">
                 <div class="contact-form">
-                    <form>
+                    <form method="post" asp-action="ContactUs" enctype="multipart/form-data">
                         <div class="row">
+                            <div asp-validation-summary="All" class="text-danger"></div>
                             <div class="col-xl-6 col-lg-6">
-                                <label for="fullName">Full Name</label>
-                                <input type="text" id="fullName" placeholder="Full name">
+                                <label asp-for="FullName">Full Name</label>
+                                <input type="text" asp-for="FullName" placeholder="Full name">
+                                <span asp-validation-for="FullName" class="text-danger"></span>
                             </div>
                             <div class="col-xl-6 col-lg-6">
-                                <label for="phoneNo">Phone No</label>
-                                <input type="text" id="phoneNo" placeholder="xxx xxx xxx">
+                                <label asp-for="PhoneNum">Phone No</label>
+                                <input type="text" asp-for="PhoneNum" placeholder="xxx xxx xxx">
+                                <span asp-validation-for="PhoneNum" class="text-danger"></span>
                             </div>
                             <div class="col-xl-6 col-lg-6">
-                                <label for="emailAdd">Email</label>
-                                <input type="text" id="emailAdd" placeholder="youremail@gmaiil.com">
+                                <label asp-for="Email">Email</label>
+                                <input type="text" asp-for="Email" placeholder="youremail@gmaiil.com">
+                                <span asp-validation-for="Email" class="text-danger"></span>
                             </div>
                             <div class="col-xl-6 col-lg-6">
-                                <label for="mailSubject">Subject</label>
-                                <input type="text" id="mailSubject" placeholder="Subject">
+                                <label asp-for="SubjectLine">Subject</label>
+                                <input type="text" asp-for="SubjectLine" placeholder="Subject line">
+                                <span asp-validation-for="SubjectLine" class="text-danger"></span>
                             </div>
                         </div>
-                        <label for="yourMessage">Subject</label>
-                        <textarea id="yourMessage" placeholder="Text"></textarea>
+                        <label asp-for="Content">Content</label>
+                        <textarea type="text" asp-for="Content" placeholder="Content"></textarea>
+                        <span asp-validation-for="Content" class="text-danger"></span>
                         <button class="submit-btn">Submit</button>
                     </form>
                 </div>
