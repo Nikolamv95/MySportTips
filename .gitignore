@@ -342,3 +342,4 @@ ASALocalRun/
 *.woff
 *.woff2
 Web/MySportTips.Web/wwwroot/theme/assets/img/preloader.gif
+Web/MySportTips.Web/appsettings.Production.json
