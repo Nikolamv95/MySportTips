@@ -41,7 +41,7 @@
             {
                 await this.gameService.CreateGameAsync(gameInputModel);
             }
-            catch (Exception ex)
+            catch (ArgumentException ex)
             {
                 this.ModelState.AddModelError(string.Empty, ex.Message);
                 var gameViewItems = this.gameService.MapAllGameItems();

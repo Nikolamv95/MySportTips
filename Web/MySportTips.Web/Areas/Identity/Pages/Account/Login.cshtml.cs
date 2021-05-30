@@ -45,10 +45,6 @@
         public class InputModel
         {
             [Required]
-            [EmailAddress]
-            public string Email { get; set; }
-
-            [Required]
             [Display(Name = "Username")]
             public string UserName { get; set; }
 
@@ -82,7 +78,7 @@
             returnUrl ??= Url.Content("~/");
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-        
+
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout

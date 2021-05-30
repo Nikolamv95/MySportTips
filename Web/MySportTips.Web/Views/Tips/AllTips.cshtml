@@ -61,11 +61,11 @@
                                 <td class="team-name">@tip.HomeTeamName<span class="versace">vs</span> @tip.AwayTeamName</td>
                                 <td class="team-name">@tip.Selection</td>
                                 <td class="score">@tip.Odd.ToString("F")</td>
-                                @if (tip.StatusName == "WIN")
+                                @if (tip.StatusName == "Win")
                                 {
-                                    <td class="score">@tip.StatusName</td>
+                                    <td class="winResult">@tip.StatusName</td>
                                 }
-                                else if (tip.StatusName == "LOST")
+                                else if (tip.StatusName == "Lost")
                                 {
                                     <td class="score">@tip.StatusName</td>
                                 }
@@ -73,7 +73,7 @@
                                 {
                                     <td class="score">@tip.StatusName</td>
                                 }
-                                <td class="scorewin">@tip.TimePeriod</td>
+                                <td class="winResult">@tip.TimePeriod</td>
                                 <td>
                                     <nav class="navbar navbar-expand-lg">
                                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
