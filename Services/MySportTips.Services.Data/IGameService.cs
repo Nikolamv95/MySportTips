@@ -11,7 +11,7 @@
 
         public AddGameInputModel MapAllGameItems();
 
-        public ICollection<GameViewModel> GetAllGamesOrderByAddDate(int page, int itemsPerPage = 10);
+        public ICollection<GameViewModel> GetAllGamesOrderByDate(int page, int itemsPerPage = 10);
 
         public GameViewModel GetById(int id);
 

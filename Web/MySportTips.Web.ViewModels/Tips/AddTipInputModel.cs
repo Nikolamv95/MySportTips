@@ -33,6 +33,6 @@
 
         public IEnumerable<KeyValuePair<string, string>> TagItems { get; set; }
 
-        public IEnumerable<KeyValuePair<string, string>> SelectionItems { get; set; }
+        public IEnumerable<string> SelectionItems { get; set; }
     }
 }

@@ -20,7 +20,18 @@
                     <div class="match-details">
                         <div class="match-time">
                             <span class="date">@tip.Selection</span>
-                            <span class="time">@tip.StatusName</span>
+                            @if (tip.StatusName == "Win")
+                            {
+                                <span class="winEvent">@tip.StatusName</span>
+                            }
+                            else if (tip.StatusName == "Lost")
+                            {
+                                <span class="lostEvent">@tip.StatusName</span>
+                            }
+                            else
+                            {
+                                <span class="unknownEvent">@tip.StatusName</span>
+                            }
                         </div>
                         <span class="versase">vs</span>
                         <div class="buttons">
@@ -29,7 +40,7 @@
                     </div>
                     <div class="single-team">
                         <div class="logo">
-                            <img src="~/theme/assets/img/Team3.png"/>
+                            <img src="~/theme/assets/img/Team3.png" />
                         </div>
                         <span class="team-name">@tip.AwayTeamName</span>
                     </div>

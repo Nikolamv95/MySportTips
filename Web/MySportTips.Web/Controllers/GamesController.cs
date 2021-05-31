@@ -98,7 +98,7 @@
             var gamesViewModel = new ListGamesViewModel()
             {
                 PageNumber = id,
-                Games = this.gameService.GetAllGamesOrderByAddDate(id, itemsPerPage),
+                Games = this.gameService.GetAllGamesOrderByDate(id, itemsPerPage),
                 EventsCount = this.gameService.GetCount(),
                 ItemsPerPage = itemsPerPage,
             };

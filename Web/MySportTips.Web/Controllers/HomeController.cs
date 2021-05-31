@@ -1,8 +1,7 @@
-﻿using System.Text;
-
-namespace MySportTips.Web.Controllers
+﻿namespace MySportTips.Web.Controllers
 {
     using System.Diagnostics;
+    using System.Text;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;

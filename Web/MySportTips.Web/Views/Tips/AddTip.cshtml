@@ -2,7 +2,7 @@
 @{
     this.ViewData["Title"] = "Add tip";
     var tagItems = this.Model.TagItems.Select(x => new SelectListItem(x.Value, x.Key));
-    var selectionItems = this.Model.SelectionItems.Select(x => new SelectListItem(x.Value, x.Key));
+    var selectionItems = this.Model.SelectionItems;
 }
 
 <!-- breadcrumb begin -->
@@ -46,7 +46,7 @@
                             <select class="form-control" asp-for="Selection" placeholder="Away team" style="width: 100%">
                                 @foreach (var selection in selectionItems)
                                 {
-                                    <option value="@selection.Text">@selection.Text</option>
+                                    <option value="@selection">@selection</option>
                                 }
                             </select>
                         </div>
@@ -107,3 +107,8 @@
         </div>
     </form>
 </div>
+<script>
+    window.onload = function() {
+        selectInput();
+    };
+</script>

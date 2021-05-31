@@ -35,8 +35,8 @@
         <div asp-validation-summary="All" class="text-danger"></div>
         <div class="card-body">
             <div class="form-group">
-                <label asp-for="DateTime"></label>
-                <input asp-for="DateTime" class="form-control" placeholder="Date Time" />
+                <label asp-for="DateTime"> </label>
+                <input asp-for="DateTime" class="form-control" />
                 <span asp-validation-for="DateTime" class="text-danger"></span>
             </div>
             <div>
@@ -134,3 +134,8 @@
         </div>
     </form>
 </div>
+<script>
+    window.onload = function () {
+        selectInput();
+    };
+</script>

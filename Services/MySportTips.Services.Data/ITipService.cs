@@ -17,7 +17,7 @@
 
         public AddTipInputModel MapAllTipItems(int gameId);
 
-        public IEnumerable<KeyValuePair<string, string>> GetAllKeyValuePairsSelection();
+        public IEnumerable<string> GetAllKeyValuePairsSelection();
 
         public EditTipInputModel MapEditTipModel(int id);
 

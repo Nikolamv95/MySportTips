@@ -82,7 +82,7 @@
         {
             return this.tipRepository
                 .All()
-                .OrderByDescending(x => x.CreatedOn)
+                .OrderByDescending(x => x.Game.DateTime)
                 .Skip((page - 1) * itemsPerPage)
                 .Take(itemsPerPage)
                 .Select(MapAllTips())
@@ -96,7 +96,7 @@
                 .Where(x => x.TimePeriod.Name == timePeriod)
                 .Skip((page - 1) * itemsPerPage)
                 .Take(itemsPerPage)
-                .OrderByDescending(x => x.CreatedOn)
+                .OrderByDescending(x => x.Game.DateTime)
                 .Select(MapAllTips())
                 .ToList();
         }
@@ -132,15 +132,9 @@
             };
         }
 
-        public IEnumerable<KeyValuePair<string, string>> GetAllKeyValuePairsSelection()
+        public IEnumerable<string> GetAllKeyValuePairsSelection()
         {
-            return this.tipRepository
-                    .All()
-                    .Select(x => new { x.Id, x.Selection })
-                    .Distinct()
-                    .OrderBy(x => x.Selection)
-                    .ToList()
-                    .Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Selection));
+            return this.tipRepository.All().Select(x => x.Selection).Distinct().ToList();
         }
 
         public EditTipInputModel MapEditTipModel(int id)

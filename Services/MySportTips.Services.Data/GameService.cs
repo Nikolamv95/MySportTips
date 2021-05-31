@@ -78,11 +78,11 @@
             };
         }
 
-        public ICollection<GameViewModel> GetAllGamesOrderByAddDate(int page, int itemsPerPage = 8)
+        public ICollection<GameViewModel> GetAllGamesOrderByDate(int page, int itemsPerPage = 8)
         {
             var games = this.gameRepository
                .All()
-               .OrderByDescending(x => x.CreatedOn)
+               .OrderByDescending(x => x.DateTime)
                .Skip((page - 1) * itemsPerPage)
                .Take(itemsPerPage)
                .Select(x => new GameViewModel()
@@ -208,6 +208,11 @@
             if (gameInputModel.Result != null)
             {
                 game.Result = gameInputModel.Result;
+            }
+
+            if (gameInputModel.DateTime != null)
+            {
+                game.DateTime = gameInputModel.DateTime;
             }
 
             if (gameInputModel.Statistics != null)
