@@ -156,5 +156,31 @@
             var tipViewModel = this.tipService.GetById(id);
             return this.View(tipViewModel);
         }
+
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public async Task<IActionResult> DeleteTip(int id)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                this.RedirectToAction(nameof(this.AllTips));
+            }
+
+            try
+            {
+                await this.tipService.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                this.ModelState.AddModelError(string.Empty, ex.Message);
+                this.RedirectToAction(nameof(this.AllTips));
+            }
+
+            this.TempData["Message"] = "The tips was deleted successfully.";
+            return this.RedirectToAction(nameof(this.AllTips));
+        }
+
+
     }
 }

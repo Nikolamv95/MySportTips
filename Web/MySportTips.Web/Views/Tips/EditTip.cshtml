@@ -102,9 +102,10 @@
 
                             <br />
                             <p>By clicking "Save", you confirm that the information of the tip will be changed</p>
-                            <button class="next" type="submit">Save</button>
-                            <br/>
-                            <hr/>
+                            <button class="save" type="submit">Save</button>
+                            <button class="next" asp-action="DeleteTip" asp-route-id="@Model.TipId">Delete</button>
+                            <br />
+                            <hr />
                             <div>
                                 <a asp-action="AllTips">Back to All Tips</a>
                             </div>

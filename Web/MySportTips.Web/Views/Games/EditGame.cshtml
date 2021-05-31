@@ -107,7 +107,8 @@
 
                             <br />
                             <p>By clicking "Save", you confirm that the information of the game will be changed</p>
-                            <button class="next" type="submit">Save</button>
+                            <button class="save" type="submit">Save</button>
+                            <button class="next" asp-action="DeleteGame" asp-route-id="@Model.GameId">Delete</button>
                             <br />
                             <hr />
                             <div>

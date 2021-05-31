@@ -22,5 +22,7 @@
         public Task EditGameAsync(EditGameInputModel gameInputModel);
 
         public int GetCount();
+
+        public Task Delete(int id);
     }
 }

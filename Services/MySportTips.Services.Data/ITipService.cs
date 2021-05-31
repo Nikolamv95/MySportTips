@@ -24,5 +24,7 @@
         public Task EditTipAsync(EditTipInputModel editTipInput);
 
         public int GetCount();
+
+        public Task Delete(int id);
     }
 }

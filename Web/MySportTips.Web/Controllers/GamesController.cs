@@ -113,5 +113,29 @@
             var gameViewModel = this.gameService.GetById(id);
             return this.View(gameViewModel);
         }
+
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public async Task<IActionResult> DeleteGame(int id)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.RedirectToAction(nameof(this.AllGames));
+            }
+
+            try
+            {
+                await this.gameService.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                this.ModelState.AddModelError(string.Empty, ex.Message);
+                return this.RedirectToAction(nameof(this.AllGames));
+            }
+
+            this.TempData["Message"] = "The game was deleted successfully.";
+            return this.RedirectToAction(nameof(this.AllGames));
+        }
     }
 }

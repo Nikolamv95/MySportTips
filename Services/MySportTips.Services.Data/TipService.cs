@@ -78,81 +78,6 @@
             await this.tipTagRepository.SaveChangesAsync();
         }
 
-        public ICollection<TipViewModel> GetAllTips(int page, int itemsPerPage)
-        {
-            return this.tipRepository
-                .All()
-                .OrderByDescending(x => x.Game.DateTime)
-                .Skip((page - 1) * itemsPerPage)
-                .Take(itemsPerPage)
-                .Select(MapAllTips())
-                .ToList();
-        }
-
-        public ICollection<TipViewModel> GetAllCurrentPastTips(string timePeriod, int page, int itemsPerPage)
-        {
-            return this.tipRepository
-                .All()
-                .Where(x => x.TimePeriod.Name == timePeriod)
-                .Skip((page - 1) * itemsPerPage)
-                .Take(itemsPerPage)
-                .OrderByDescending(x => x.Game.DateTime)
-                .Select(MapAllTips())
-                .ToList();
-        }
-
-        public TipViewModel GetById(int id)
-        {
-            return this.tipRepository.All().Where(x => x.Id == id).Select(x => new TipViewModel
-            {
-                TipId = x.Id,
-                GameId = x.Game.Id,
-                DateTime = x.Game.DateTime,
-                SportName = x.Game.Sport.Name,
-                CountryName = x.Game.Country.Name,
-                CompetitionName = x.Game.Competition.Name,
-                HomeTeamName = x.Game.HomeTeam.Name,
-                AwayTeamName = x.Game.AwayTeam.Name,
-                Selection = x.Selection,
-                Description = x.Description,
-                Odd = x.Odd,
-                StatusName = x.Status.Name,
-                TimePeriod = x.TimePeriod.Name,
-                Tag = x.TipTags.Where(t => t.TipId == id).Select(x => x.Tag.Name).FirstOrDefault(),
-            }).FirstOrDefault();
-        }
-
-        public AddTipInputModel MapAllTipItems(int gameId)
-        {
-            return new AddTipInputModel()
-            {
-                GameId = gameId,
-                TagItems = this.tagService.GetAllKeyValuePairs(),
-                SelectionItems = this.GetAllKeyValuePairsSelection(),
-            };
-        }
-
-        public IEnumerable<string> GetAllKeyValuePairsSelection()
-        {
-            return this.tipRepository.All().Select(x => x.Selection).Distinct().ToList();
-        }
-
-        public EditTipInputModel MapEditTipModel(int id)
-        {
-            return this.tipRepository
-                .All()
-                .Where(x => x.Id == id)
-                .Select(x => new EditTipInputModel
-                {
-                    TipId = x.Id,
-                    Selection = x.Selection,
-                    Description = x.Description,
-                    Odd = x.Odd,
-                    StatusName = x.Status.Name,
-                    TimePeriod = x.TimePeriod.Name,
-                }).FirstOrDefault();
-        }
-
         public async Task EditTipAsync(EditTipInputModel editTipInput)
         {
             if (!this.tipRepository.All().Any(x => x.Id == editTipInput.TipId))
@@ -186,6 +111,94 @@
             }
 
             await this.tipRepository.SaveChangesAsync();
+        }
+
+        public async Task Delete(int id)
+        {
+            var tip = this.tipRepository.All().FirstOrDefault(x => x.Id == id);
+
+            if (tip == null)
+            {
+                throw new InvalidOperationException("Tip with this id doesn't exist!");
+            }
+
+            this.tipRepository.Delete(tip);
+            await this.tipRepository.SaveChangesAsync();
+        }
+
+        public TipViewModel GetById(int id)
+        {
+            return this.tipRepository.All().Where(x => x.Id == id).Select(x => new TipViewModel
+            {
+                TipId = x.Id,
+                GameId = x.Game.Id,
+                DateTime = x.Game.DateTime,
+                SportName = x.Game.Sport.Name,
+                CountryName = x.Game.Country.Name,
+                CompetitionName = x.Game.Competition.Name,
+                HomeTeamName = x.Game.HomeTeam.Name,
+                AwayTeamName = x.Game.AwayTeam.Name,
+                Selection = x.Selection,
+                Description = x.Description,
+                Odd = x.Odd,
+                StatusName = x.Status.Name,
+                TimePeriod = x.TimePeriod.Name,
+                Tag = x.TipTags.Where(t => t.TipId == id).Select(x => x.Tag.Name).FirstOrDefault(),
+            }).FirstOrDefault();
+        }
+
+        public ICollection<TipViewModel> GetAllTips(int page, int itemsPerPage)
+        {
+            return this.tipRepository
+                .All()
+                .OrderByDescending(x => x.Game.DateTime)
+                .Skip((page - 1) * itemsPerPage)
+                .Take(itemsPerPage)
+                .Select(MapAllTips())
+                .ToList();
+        }
+
+        public ICollection<TipViewModel> GetAllCurrentPastTips(string timePeriod, int page, int itemsPerPage)
+        {
+            return this.tipRepository
+                .All()
+                .Where(x => x.TimePeriod.Name == timePeriod)
+                .Skip((page - 1) * itemsPerPage)
+                .Take(itemsPerPage)
+                .OrderByDescending(x => x.Game.DateTime)
+                .Select(MapAllTips())
+                .ToList();
+        }
+
+        public IEnumerable<string> GetAllKeyValuePairsSelection()
+        {
+            return this.tipRepository.All().Select(x => x.Selection).Distinct().ToList();
+        }
+
+        public AddTipInputModel MapAllTipItems(int gameId)
+        {
+            return new AddTipInputModel()
+            {
+                GameId = gameId,
+                TagItems = this.tagService.GetAllKeyValuePairs(),
+                SelectionItems = this.GetAllKeyValuePairsSelection(),
+            };
+        }
+
+        public EditTipInputModel MapEditTipModel(int id)
+        {
+            return this.tipRepository
+                .All()
+                .Where(x => x.Id == id)
+                .Select(x => new EditTipInputModel
+                {
+                    TipId = x.Id,
+                    Selection = x.Selection,
+                    Description = x.Description,
+                    Odd = x.Odd,
+                    StatusName = x.Status.Name,
+                    TimePeriod = x.TimePeriod.Name,
+                }).FirstOrDefault();
         }
 
         public int GetCount()

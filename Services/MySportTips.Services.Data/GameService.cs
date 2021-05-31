@@ -223,6 +223,19 @@
             await this.gameRepository.SaveChangesAsync();
         }
 
+        public async Task Delete(int id)
+        {
+            var game = this.gameRepository.All().FirstOrDefault(x => x.Id == id);
+
+            if (game == null)
+            {
+                throw new InvalidOperationException("Game with this id doesn't exist!");
+            }
+
+            this.gameRepository.Delete(game);
+            await this.gameRepository.SaveChangesAsync();
+        }
+
         public int GetCount()
         {
             return this.gameRepository.All().Count();
