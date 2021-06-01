@@ -77,8 +77,8 @@
                 throw new Exception("The role is invalid");
             }
 
-            var roledCheck = await this.roleManager.FindByNameAsync(userInputModel.NewRole);
-            if (roledCheck == null)
+            var roleCheck = await this.roleManager.FindByNameAsync(userInputModel.NewRole);
+            if (roleCheck == null)
             {
                 var role = new ApplicationRole(userInputModel.NewRole);
                 await this.roleManager.CreateAsync(role);

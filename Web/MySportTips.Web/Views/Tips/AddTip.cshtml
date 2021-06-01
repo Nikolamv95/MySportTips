@@ -44,6 +44,7 @@
                     <div class="input-group-append">
                         <div class="input-group-prepend">
                             <select class="form-control" asp-for="Selection" placeholder="Away team" style="width: 100%">
+                                <option hidden="hidden" disabled="disabled" selected="selected">Choose Selection</option>
                                 @foreach (var selection in selectionItems)
                                 {
                                     <option value="@selection">@selection</option>
@@ -91,6 +92,7 @@
                     <div class="input-group-append">
                         <div class="input-group-prepend">
                             <select class="form-control" asp-for="TagName" placeholder="Away team" style="width: 100%">
+                                <option hidden="hidden" disabled="disabled" selected="selected">Choose TagName</option>
                                 @foreach (var tag in tagItems)
                                 {
                                     <option value="@tag.Text">@tag.Text</option>
@@ -108,7 +110,12 @@
     </form>
 </div>
 <script>
-    window.onload = function() {
-        selectInput();
-    };
+    document.body.addEventListener('change', function (event) {
+        let target = event.target;
+        console.log(target);
+        if (target.classList.contains('form-control')) {
+            target.offsetParent.firstChild.nextElementSibling.placeholder = target.value;
+            target.offsetParent.firstChild.nextElementSibling.value = target.value;
+        }
+    });
 </script>
