@@ -34,6 +34,12 @@
         <div class="result-sheet-cover">
             <div class="result-sheet">
                 <h4 class="result-title">All Sport Tips</h4>
+                <div class="tags" style="float: right">
+                    <label><input type="checkbox" rel="allResults" checked="checked" /> All </label>
+                    <label><input type="checkbox" rel="wonResult" /> Win </label>
+                    <label><input type="checkbox" rel="lostResult"/> Lost </label>
+                    <label><input type="checkbox" rel="unknownResult"/> Unknown </label>
+                </div>
                 <table class="table">
                     <thead>
                         <tr>
@@ -51,7 +57,7 @@
                     <tbody>
                         @foreach (var tip in @Model.Tips)
                         {
-                            <tr>
+                            <tr class="allResults">
                                 <th scope="row">
                                     <span class="icon">
                                         <i class="flaticon-football"></i>
@@ -62,19 +68,8 @@
                                 <td class="team-name">@tip.HomeTeamName<span class="versace">vs</span> @tip.AwayTeamName</td>
                                 <td class="team-name">@tip.Selection</td>
                                 <td class="score">@tip.Odd.ToString("F")</td>
-                                @if (tip.StatusName == "Win")
-                                {
-                                    <td class="winResult">@tip.StatusName</td>
-                                }
-                                else if (tip.StatusName == "Lost")
-                                {
-                                    <td class="score">@tip.StatusName</td>
-                                }
-                                else
-                                {
-                                    <td class="scoreunkown">@tip.StatusName</td>
-                                }
-                                <td class="winResult">@tip.TimePeriod</td>
+                                <td class="winResult">@tip.StatusName</td>
+                                <td class="scoreunkown">@tip.TimePeriod</td>
                                 <td>
                                     <nav class="navbar navbar-expand-lg">
                                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -102,101 +97,38 @@
     </div>
 </div>
 <!-- result end -->
+@section Scripts{
+    <script src="~/theme/assets/js/jquery.js"></script>
+    <script>
+        var updateRows = function () {
+            // Get ones to show
+            var toShow = [];
+            $('div.tags input[type=checkbox]:checked').each(function () {
+                var box = $(this);
+                toShow.push('.' + box.attr('rel'));
+            });
+            toShow = toShow.join(', ');
 
-<div class="result">
-    <div class="container">
-        <div class="result-sheet-cover">
-            <div class="result-sheet">
-                <h4 class="result-title">All Sport Tips</h4>
-                <div class="tags">
-                    <label><input type="checkbox" rel="twin" checked="checked" /> win </label>
-                    <label><input type="checkbox" rel="lostt" checked="checked" /> lost </label>
-                    <label><input type="checkbox" rel="unknow" checked="checked" /> unknown </label>
-                </div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col"></th>
-                            <th scope="col">Date & Time</th>
-                            <th scope="col">Competition</th>
-                            <th scope="col">Event</th>
-                            <th scope="col">Selection</th>
-                            <th scope="col">Odd</th>
-                            <th scope="col">Win/Lost</th>
-                            <th scope="col">Period</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var tip in @Model.Tips)
-                        {
-                            <tr>
-                                <th scope="row">
-                                    <span class="icon">
-                                        <i class="flaticon-football"></i>
-                                    </span>
-                                </th>
-                                <td class="date">@tip.DateTime.ToString("M")</td>
-                                <td class="date">@tip.CompetitionName</td>
-                                <td class="team-name">@tip.HomeTeamName<span class="versace">vs</span> @tip.AwayTeamName</td>
-                                <td class="team-name">@tip.Selection</td>
-                                <td class="score">@tip.Odd.ToString("F")</td>
-                                @if (tip.StatusName == "Win")
-                                {
-                                    <td class="winResult">@tip.StatusName</td>
-                                }
-                                else if (tip.StatusName == "Lost")
-                                {
-                                    <td class="score">@tip.StatusName</td>
-                                }
-                                else
-                                {
-                                    <td class="scoreunkown">@tip.StatusName</td>
-                                }
-                                <td class="winResult">@tip.TimePeriod</td>
-                                <td>
-                                    <nav class="navbar navbar-expand-lg">
-                                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                            <ul class="navbar-nav ml-auto">
-                                                <li class="nav-item dropdown">
-                                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        Menu
-                                                    </a>
-                                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                        <a asp-action="ById" asp-route-id="@tip.TipId" asp-route-TipId="@tip.TipId" class="dropdown-item">Info</a>
-                                                        <a asp-action="EditTip" asp-route-id="@tip.TipId" asp-route-TipId="@tip.TipId" class="dropdown-item">Edit</a>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </nav>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script src="~/theme/assets/js/jquery.js"></script>
-<script>
-    var updateRows = function () {
-        // Get ones to show
-        var toShow = [];
-        $('div.tags input[type=checkbox]:checked').each(function () {
-            var box = $(this);
-            toShow.push('.' + box.attr('rel'));
-        });
-        toShow = toShow.join(', ');
-
-        // Filter rows
-        $('table > tbody > tr').each(function () {
-            var row = $(this);
-            row.toggle(row.is(toShow));
-        });
-    };
-    $('div.tags input[type=checkbox]').click(updateRows);
-    updateRows();
-</script>
+            // Filter rows
+            $('table > tbody > tr').each(function () {
+                var row = $(this);
+                row.toggle(row.is(toShow));
+            });
+        };
+        $('div.tags input[type=checkbox]').click(updateRows);
+        updateRows();
+    </script>
+    <script>
+        let trs = [...document.querySelectorAll('tr')].slice(1);
+        for (var tr of trs) {
+            let td = [...tr.getElementsByClassName('winResult')];
+            if (td[0].textContent === 'Win') {
+                tr.classList.add('wonResult');
+            } else if (td[0].textContent === 'Lost') {
+                tr.classList.add('lostResult');
+            } else {
+                tr.classList.add('unknownResult');
+            }
+        }
+    </script>
+}
