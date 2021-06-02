@@ -32,12 +32,12 @@
         <div class="result-sheet-cover">
             <div class="result-sheet">
                 <h4 class="result-title">All Sport Tips</h4>
-                <form id="live-search" action="" class="form-inline" method="post" style="float: right">
+                <form id="live-search" action="" class="form-inline" method="get" style="float: right">
                     <fieldset>
                         <input type="text" class="form-control mr-md-2" placeholder="Search" id="filter" aria-label="Search" value="" />
                         <span class="btn btn-outline-danger my-2 my-sm-0"><i class="fas fa-search"></i></span>
-                        <hr/>
-                        <a class="blockquote" id="filter-count"></a>
+                        <hr />
+                        <a class="blockquote" id="filter-count" style="color: #dc143c"></a>
                     </fieldset>
                 </form>
                 <table class="table">
@@ -70,32 +70,47 @@
     </div>
 </div>
 
-<script src="~/theme/assets/js/jquery-3.4.1.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $("#filter").keyup(function () {
+@section Scripts
+    {
+    <script src="~/theme/assets/js/jquery-3.4.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#filter").keyup(function () {
 
-            // Retrieve the input field text and reset the count to zero
-            var filter = $(this).val(), count = 0;
+                // Retrieve the input field text and reset the count to zero
+                var filter = $(this).val(), count = 0;
 
-            // Loop through the comment list
-            $("table tbody tr").each(function () {
+                // Loop through the comment list
+                $("table tbody tr").each(function () {
 
-                // If the list item does not contain the text phrase fade it out
-                if ($(this).text().search(new RegExp(filter, "d")) < 0) {
-                    $(this).fadeOut();
+                    // If the list item does not contain the text phrase fade it out
+                    if ($(this).text().search(new RegExp(filter, "d")) < 0) {
+                        $(this).fadeOut();
 
-                    // Show the list item if the phrase matches and increase the count by 1
-                } else {
-                    $(this).show();
-                    count++;
-                }
+                        // Show the list item if the phrase matches and increase the count by 1
+                    } else {
+                        $(this).show();
+                        count++;
+                    }
+                });
+
+                // Update the count
+                var numberItems = count;
+                $("#filter-count").text("Users found = " + count);
+
             });
-
-            // Update the count
-            var numberItems = count;
-            $("#filter-count").text("Users found = " + count);
         });
-    });
-</script>
+    </script>
+    <script>
+        let foundUsers = document.getElementById('filter-count');
+        document.getElementById('filter').addEventListener('change', (event) => {
+            if (event.target.value == '') {
+                foundUsers.textContent = '';
+            }
+        });
+    </script>
+}
+
+
+
 

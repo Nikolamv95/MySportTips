@@ -109,13 +109,15 @@
         </div>
     </form>
 </div>
-<script>
-    document.body.addEventListener('change', function (event) {
-        let target = event.target;
-        console.log(target);
-        if (target.classList.contains('form-control')) {
-            target.offsetParent.firstChild.nextElementSibling.placeholder = target.value;
-            target.offsetParent.firstChild.nextElementSibling.value = target.value;
-        }
-    });
-</script>
+@section Scripts{
+    <script>
+        document.body.addEventListener('change', function (event) {
+            let target = event.target;
+            console.log(target);
+            if (target.classList.contains('form-control')) {
+                target.offsetParent.firstChild.nextElementSibling.placeholder = target.value;
+                target.offsetParent.firstChild.nextElementSibling.value = target.value;
+            }
+        });
+    </script>
+}
