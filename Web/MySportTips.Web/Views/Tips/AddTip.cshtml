@@ -32,7 +32,7 @@
     </div>
     <form method="post" asp-action="AddTip" enctype="multipart/form-data">
         <div asp-validation-summary="All" class="text-danger"></div>
-        <div class="card-body" id="card-full-body">
+        <div class="card-body">
             <div class="form-group">
                 <input type="hidden" asp-for="GameId" />
                 <span asp-validation-for="GameId" class="text-danger"></span>
@@ -109,18 +109,15 @@
         </div>
     </form>
 </div>
-
 @section Scripts{
     <script>
-        let element = document.getElementById('card-full-body');
-        element.addEventListener('change', function (event) {
+        document.body.addEventListener('change', function (event) {
             let target = event.target;
+            console.log(target);
             if (target.classList.contains('form-control')) {
-                let input = target.offsetParent.querySelector('input');
-                input.placeholder = target.value;
-                input.value = target.value;
+                target.offsetParent.firstChild.nextElementSibling.placeholder = target.value;
+                target.offsetParent.firstChild.nextElementSibling.value = target.value;
             }
         });
     </script>
 }
-

@@ -147,13 +147,12 @@
 @section Scripts
 {
     <script>
-        let element = document.getElementById('card-full-body');
-        element.addEventListener('change', function (event) {
+        document.body.addEventListener('change', function (event) {
             let target = event.target;
+            console.log(target);
             if (target.classList.contains('form-control')) {
-                let input = target.offsetParent.querySelector('input');
-                input.placeholder = target.value;
-                input.value = target.value;
+                target.offsetParent.firstChild.nextElementSibling.placeholder = target.value;
+                target.offsetParent.firstChild.nextElementSibling.value = target.value;
             }
         });
     </script>
