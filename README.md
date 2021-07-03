@@ -1,11 +1,11 @@
-## Table of contents
+# MySportTips
+Personal project for sharing sports betting tips.
+
+## ℹ️ Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
 * [Admin Login](#Login)
-* [Site View](#Site View)
-
-## ℹ️ General info
-Personal project for sharing sports betting tips.
+* [Site View](#site-view)
 	
 ## 💻 Technologies
 Project is created with:
@@ -17,12 +17,15 @@ Project is created with:
 * Bootstrap
 * Microsoft Azure
 
-## Admin Login
+## ⚽ Admin Login
+Click here to see it in action: https://ndtips.azurewebsites.net/
+
 Loin time up to 10 seconds
+
  * Username: admin@abv.bg
  * Password: 123123
 
-## Site View
+## 📲 Site View
 
 ### Home Page
 ![HomePage](https://user-images.githubusercontent.com/75838730/124352155-5b534e00-dc07-11eb-8e9a-24b8cad99908.png)
@@ -34,12 +37,12 @@ Loin time up to 10 seconds
 ![TipPage](https://user-images.githubusercontent.com/75838730/124352312-4aefa300-dc08-11eb-921e-63fa2f91c835.png)
 
 ### Admin Menu All tips
-This page is part from the admin menu. I used JQuery script to add functionallity which filter the tips by result WIN, LOST, Unkonwn
+This page is part from the admin menu. I used JQuery script to add functionallity which filter the tips by result WIN, LOST, Unkonwn.
 
 ![TipsView](https://user-images.githubusercontent.com/75838730/124352317-4c20d000-dc08-11eb-9961-e636080d0b74.png)
 
 ### Admin Menu List Users
-This page is part from the admin menu. I used JavaScript & JQuery to add functionallity which search users by username or email 
+This page is part from the admin menu. I used JavaScript & JQuery to add functionallity which search users by username or email .
 
 ![ListUsersMenue](https://user-images.githubusercontent.com/75838730/124352315-4b883980-dc08-11eb-9d6a-65a7908e3734.png)
 
@@ -48,10 +51,30 @@ This page is part from the admin menu. The idea behind this functionality is to 
 
 ![AddGameMenue](https://user-images.githubusercontent.com/75838730/124352319-4c20d000-dc08-11eb-8562-3691370a5fe9.png)
 
-## 👨‍ Template Author
+## 👨‍ Author
 
 [Nikola Margaritov](https://github.com/Nikolamv95)
 
-For more interesting functionalities you can open the website in azure and login with the admin credentials. Because the azure plan is basic the loading time is approximately 10 seconds. I will be happy to hear your feedback regarding the code quality.
+For more interesting functionalities you can open the website in azure and login with the admin credentials. Because the azure plan is basic the loading time is approximately up to 10 seconds. I will be happy to hear your feedback regarding the code quality.
 
-Thanks
+## 👀 Try it out
+Make sure you have the .NET Core 3.1 SDK installed on your machine. Then do:
+
+```
+$ git clone https://github.com/Nikolamv95/MySportTips.git
+$ cd MySportTips
+$ dotnet run --project MySportTips/Web/MySportTips.Web/MySportTips.Web.csproj
+```
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!
+
+## 📝 License
+
+This project is licensed under MIT license.
+
+## 👨‍🚀 Show your support
+
+Give a ⭐ if you like this project!
+
